@@ -742,7 +742,31 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     <div class="rule"><span class="diamond"></span></div>
     <h2>Les deux méthodes, les deux canevas —<br>et deux romans complets offerts.</h2>
     <p class="price-line"><b>9 900 FCFA</b> au lieu de 15 000 FCFA à l'unité.</p>
-    <a href="https://boutique.eroskadima.com/prd_miqemtit?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" class="btn buy-link" target="_blank" rel="noopener">Obtenir le Pack Auteur Complet</a>
+    <!-- Test A/B : widget Chariow Snap (achat sans redirection) sur ce seul CTA final,
+         pendant que les autres CTA du tunnel restent des liens classiques avec UTM
+         (comparaison possible entre les deux approches). -->
+    <div id="chariow-widget" data-product-id="prd_miqemtit"
+        data-store-domain="boutique.eroskadima.com"
+        data-style="tap"
+        data-border-style="rounded"
+        data-cta-width="xs"
+        data-cta-animation="none"
+        data-locale="fr"
+        data-primary-color="#d3402f"
+        data-background-color="#FFFFFF"></div>
+    <script>
+    (function() {
+      var script = document.createElement('script');
+      script.src = 'https://js.chariowcdn.com/v1/widget.min.js';
+      script.async = true;
+      document.head.appendChild(script);
+
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://js.chariowcdn.com/v1/widget.min.css';
+      document.head.appendChild(link);
+    })();
+    </script>
   </section>
 
   <footer>Eros Kadima — Les Outils de l'Auteur<br><a href="https://wa.me/447451256734" target="_blank" rel="noopener" class="support-link">Support WhatsApp : +44 74 51 25 67 34</a></footer>
