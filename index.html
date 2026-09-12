@@ -542,6 +542,66 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
   .sticky-cta .btn { padding: 11px 18px; font-size: 13px; white-space: nowrap; }
   body { padding-bottom: 68px; }
 }
+
+/* ---------- POPUP LEAD MAGNET (15 prompts IA) ---------- */
+.exit-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(10,8,9,0.82);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease;
+}
+.exit-popup-overlay.is-open { opacity: 1; visibility: visible; }
+.exit-popup-card {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  background: linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--deep-red);
+  box-shadow: inset 0 0 0 1px rgba(232,224,208,0.04), 0 24px 60px rgba(0,0,0,.6);
+  padding: 38px 30px 30px;
+  text-align: center;
+  transform: translateY(10px) scale(.98);
+  transition: transform .25s ease;
+}
+.exit-popup-overlay.is-open .exit-popup-card { transform: translateY(0) scale(1); }
+.exit-popup-card::before, .exit-popup-card::after {
+  content: "";
+  position: absolute;
+  width: 8px; height: 8px;
+  background: var(--bright-red);
+  transform: rotate(45deg);
+}
+.exit-popup-card::before { top: -4px; left: -4px; }
+.exit-popup-card::after { bottom: -4px; right: -4px; }
+.exit-popup-close {
+  position: absolute;
+  top: 12px; right: 14px;
+  background: none;
+  border: none;
+  color: var(--cream-dim);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+}
+.exit-popup-close:hover { color: var(--cream); }
+.exit-popup-eyebrow { letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; color: var(--cream-dim); margin-bottom: 10px; }
+.exit-popup-card h3 { font-family: 'Cardo', serif; font-size: 24px; color: var(--bright-red); margin-bottom: 12px; line-height: 1.3; }
+.exit-popup-card p.desc { font-size: 14.5px; color: var(--cream); line-height: 1.6; margin-bottom: 22px; }
+.exit-popup-card .btn { width: 100%; }
+.exit-popup-fine { font-size: 11.5px; color: var(--cream-dim); margin-top: 14px; opacity: .8; }
+@media (prefers-reduced-motion: reduce) {
+  .exit-popup-overlay, .exit-popup-card { transition: none; }
+}
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -830,6 +890,77 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
   <div class="info"><span class="lbl">Pack Auteur Complet</span><br><span class="amt">9 900 FCFA</span></div>
   <a href="https://boutique.eroskadima.com/prd_miqemtit?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" class="btn buy-link" target="_blank" rel="noopener">Obtenir</a>
 </div>
+
+<div class="exit-popup-overlay" id="exitPopup" role="dialog" aria-modal="true" aria-labelledby="exitPopupTitle">
+  <div class="exit-popup-card">
+    <button class="exit-popup-close" id="exitPopupClose" aria-label="Fermer">&times;</button>
+    <p class="exit-popup-eyebrow">Pas encore prêt·e à commander ?</p>
+    <h3 id="exitPopupTitle">15 prompts IA offerts</h3>
+    <p class="desc">Pour démarrer, débloquer une scène ou trouver le bon ton — à copier-coller directement dans ton IA. Gratuit, livré par email.</p>
+    <a href="https://boutique.eroskadima.com/prd_jgulxvws?utm_source=tunnel&utm_medium=popup&utm_campaign=prompts_ia" class="btn" target="_blank" rel="noopener" id="exitPopupCta">Recevoir les 15 prompts</a>
+    <p class="exit-popup-fine">Sans engagement — le Pack Auteur Complet reste disponible juste au-dessus.</p>
+  </div>
+</div>
+
+<script>
+/* ===== Popup lead magnet (15 prompts IA) =====
+   Se déclenche une seule fois par session, au premier des deux signaux :
+   (1) intention de sortie desktop (curseur qui quitte la page par le haut),
+   (2) inactivité prolongée — sert de repli sur mobile, où il n'y a pas de mouseleave.
+   Un délai minimum évite de montrer le popup à quelqu'un qui vient d'arriver. */
+(function() {
+  var MIN_DELAY_MS = 20000;   // rien avant 20s de lecture
+  var IDLE_MS = 25000;        // repli mobile : 25s sans interaction après le délai minimum
+  var STORAGE_KEY = "outils_auteur_popup_vu";
+
+  if (sessionStorage.getItem(STORAGE_KEY)) return;
+
+  var overlay = document.getElementById("exitPopup");
+  var closeBtn = document.getElementById("exitPopupClose");
+  var eligible = false;
+  var shown = false;
+  var idleTimer = null;
+
+  function openPopup() {
+    if (shown) return;
+    shown = true;
+    overlay.classList.add("is-open");
+    try { sessionStorage.setItem(STORAGE_KEY, "1"); } catch (e) {}
+    document.removeEventListener("mouseleave", onMouseLeave);
+    document.removeEventListener("mousemove", resetIdle);
+    document.removeEventListener("scroll", resetIdle);
+    document.removeEventListener("touchstart", resetIdle);
+  }
+
+  function closePopup() {
+    overlay.classList.remove("is-open");
+  }
+
+  function onMouseLeave(e) {
+    if (!eligible) return;
+    if (e.clientY <= 0) openPopup();
+  }
+
+  function resetIdle() {
+    if (!eligible || shown) return;
+    if (idleTimer) clearTimeout(idleTimer);
+    idleTimer = setTimeout(openPopup, IDLE_MS);
+  }
+
+  closeBtn.addEventListener("click", closePopup);
+  overlay.addEventListener("click", function(e) { if (e.target === overlay) closePopup(); });
+  document.addEventListener("keydown", function(e) { if (e.key === "Escape") closePopup(); });
+
+  setTimeout(function() {
+    eligible = true;
+    document.addEventListener("mouseleave", onMouseLeave);
+    document.addEventListener("mousemove", resetIdle);
+    document.addEventListener("scroll", resetIdle, { passive: true });
+    document.addEventListener("touchstart", resetIdle, { passive: true });
+    resetIdle();
+  }, MIN_DELAY_MS);
+})();
+</script>
 
 <script>
 /* ===== Meta Pixel =====
