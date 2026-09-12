@@ -566,21 +566,32 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 .trust-line svg { width: 13px; height: 13px; fill: var(--cream-dim); vertical-align: -2px; margin-right: 4px; }
 
 /* ---------- CTA FLOTTANT (dynamique : apparaît après le hero, disparaît près du CTA final) ---------- */
+/* IMPORTANT : .sticky-cta contient directement un widget Snap Chariow (#chariow-widget).
+   Chariow injecte sa modale de paiement (.cw-modal-wrapper, position:fixed) comme DESCENDANT
+   de ce bouton plutôt que de la « porter » (portal) vers <body>. Or, en CSS, tout ancêtre
+   portant un `transform` (même translateY(0), une matrice identité) OU un `filter`/
+   `backdrop-filter` non « none » devient le bloc conteneur des descendants `position:fixed` —
+   au lieu du vrai viewport. Comme .sticky-cta est une fine barre collée tout en bas de l'écran,
+   la modale de paiement se retrouvait positionnée/dimensionnée par rapport à cette fine barre
+   au lieu de l'écran entier, et se retrouvait quasi entièrement hors-écran (bouton payer
+   inatteignable). Vérifié en direct (DevTools) : supprimer transform + backdrop-filter de
+   .sticky-cta remet la modale exactement dans les limites de l'écran.
+   → On anime donc via `bottom` (pas `transform`) et le flou est déporté sur un ::before
+   (qui n'est pas un ancêtre du widget, donc ne crée pas ce problème). */
 .sticky-cta {
   position: fixed;
   z-index: 50;
   opacity: 0;
-  transform: translateY(16px);
   pointer-events: none;
-  transition: opacity .4s ease, transform .4s ease;
+  transition: opacity .4s ease, bottom .4s ease;
 }
-.sticky-cta.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.sticky-cta.is-visible { opacity: 1; pointer-events: auto; }
 
 /* bureau : carte compacte en bas à droite */
 @media (min-width: 621px) {
   .sticky-cta {
     display: flex;
-    right: 24px; bottom: 24px;
+    right: 24px; bottom: 8px;
     align-items: center;
     gap: 16px;
     padding: 14px 20px;
@@ -589,6 +600,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     border-radius: 3px;
     box-shadow: 0 14px 36px rgba(0,0,0,.5);
   }
+  .sticky-cta.is-visible { bottom: 24px; }
   .sticky-cta .info { line-height: 1.25; }
   .sticky-cta .info .lbl { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-dim); }
   .sticky-cta .info .amt { font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red); font-size: 17px; }
@@ -599,18 +611,26 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 @media (max-width: 620px) {
   .sticky-cta {
     display: flex;
-    left: 0; right: 0; bottom: 0;
+    left: 0; right: 0; bottom: -100px;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
     padding: 12px 16px;
     background: linear-gradient(180deg, rgba(10,8,9,.85), var(--ink) 30%);
     border-top: 1px solid var(--deep-red);
+  }
+  /* flou déposé sur un pseudo-élément (pas un ancêtre du widget) pour ne pas casser
+     le positionnement de la modale de paiement Chariow — voir commentaire ci-dessus */
+  .sticky-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    transform: translateY(100%);
+    z-index: -1;
+    pointer-events: none;
   }
-  .sticky-cta.is-visible { transform: translateY(0); }
+  .sticky-cta.is-visible { bottom: 0; }
   .sticky-cta .info { line-height: 1.25; }
   .sticky-cta .info .lbl { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-dim); }
   .sticky-cta .info .amt { font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red); font-size: 18px; }
@@ -708,10 +728,15 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
   box-shadow: inset 0 0 0 1px rgba(232,224,208,0.04), 0 24px 60px rgba(0,0,0,.6);
   padding: 38px 30px 30px;
   text-align: center;
-  transform: translateY(10px) scale(.98);
-  transition: transform .25s ease;
+  /* translate/scale en propriétés CSS indépendantes plutôt que `transform` : ce widget
+     contient lui aussi un #chariow-widget, et `transform` (même à l'état ouvert, translateY(0))
+     créerait le même bloc conteneur problématique pour la modale Chariow que sur .sticky-cta
+     (voir commentaire détaillé là-bas). Ces propriétés produisent le même rendu sans ce risque. */
+  translate: 0 10px;
+  scale: .98;
+  transition: translate .25s ease, scale .25s ease;
 }
-.exit-popup-overlay.is-open .exit-popup-card { transform: translateY(0) scale(1); }
+.exit-popup-overlay.is-open .exit-popup-card { translate: 0 0; scale: 1; }
 .exit-popup-card::before, .exit-popup-card::after {
   content: "";
   position: absolute;
