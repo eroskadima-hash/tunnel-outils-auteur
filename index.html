@@ -159,6 +159,27 @@ em { font-style: italic; color: var(--cream-dim); }
 .btn-small { padding: 10px 22px; font-size: 14px; }
 .btn-block { display: block; text-align: center; }
 
+.hero-gift-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 20px auto 0;
+  background: none;
+  border: none;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--cream-dim);
+  cursor: pointer;
+  padding: 4px 2px;
+  text-decoration: underline;
+  text-decoration-color: rgba(211,64,47,.45);
+  text-underline-offset: 5px;
+  transition: color .2s ease;
+}
+.hero-gift-hint .diamond { width: 6px; height: 6px; }
+.hero-gift-hint:hover { color: var(--cream); }
+
 /* ---------- PREUVE ---------- */
 .proof-grid {
   display: grid;
@@ -519,14 +540,41 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 }
 .trust-line svg { width: 13px; height: 13px; fill: var(--cream-dim); vertical-align: -2px; margin-right: 4px; }
 
-/* ---------- CTA FLOTTANT MOBILE ---------- */
-.sticky-cta { display: none; }
+/* ---------- CTA FLOTTANT (dynamique : apparaît après le hero, disparaît près du CTA final) ---------- */
+.sticky-cta {
+  position: fixed;
+  z-index: 50;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity .4s ease, transform .4s ease;
+}
+.sticky-cta.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* bureau : carte compacte en bas à droite */
+@media (min-width: 621px) {
+  .sticky-cta {
+    display: flex;
+    right: 24px; bottom: 24px;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    background: linear-gradient(160deg, rgba(20,10,11,.97), var(--ink) 78%);
+    border: 1px solid var(--deep-red);
+    border-radius: 3px;
+    box-shadow: 0 14px 36px rgba(0,0,0,.5);
+  }
+  .sticky-cta .info { line-height: 1.25; }
+  .sticky-cta .info .lbl { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-dim); }
+  .sticky-cta .info .amt { font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red); font-size: 17px; }
+  .sticky-cta .btn { padding: 10px 18px; font-size: 13px; white-space: nowrap; }
+}
+
+/* mobile : bandeau plein largeur en bas */
 @media (max-width: 620px) {
   .sticky-cta {
     display: flex;
-    position: fixed;
     left: 0; right: 0; bottom: 0;
-    z-index: 50;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
@@ -535,12 +583,72 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     border-top: 1px solid var(--deep-red);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+    transform: translateY(100%);
   }
+  .sticky-cta.is-visible { transform: translateY(0); }
   .sticky-cta .info { line-height: 1.25; }
   .sticky-cta .info .lbl { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-dim); }
   .sticky-cta .info .amt { font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red); font-size: 18px; }
   .sticky-cta .btn { padding: 11px 18px; font-size: 13px; white-space: nowrap; }
   body { padding-bottom: 68px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta { transition: none; }
+}
+
+/* ---------- CADEAU FLOTTANT (ouvre le popup 15 prompts IA) ---------- */
+.gift-float {
+  position: fixed;
+  left: 16px;
+  bottom: 24px;
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 18px 11px 14px;
+  background: linear-gradient(135deg, var(--deep-red), var(--ink) 72%);
+  border: 1px solid var(--red);
+  border-radius: 999px;
+  color: var(--cream);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 14px;
+  letter-spacing: .01em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 8px 26px rgba(0,0,0,.45);
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity .4s ease, transform .4s ease;
+}
+.gift-float.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.gift-float:hover { border-color: var(--bright-red); }
+.gift-float .gift-mark { position: relative; width: 8px; height: 8px; flex-shrink: 0; }
+.gift-float .gift-mark::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--bright-red);
+  transform: rotate(45deg);
+}
+.gift-float .gift-mark::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 1px solid var(--bright-red);
+  border-radius: 50%;
+  opacity: .5;
+  animation: giftPulse 2.6s ease-out infinite;
+}
+@keyframes giftPulse {
+  0% { transform: scale(.55); opacity: .55; }
+  100% { transform: scale(2); opacity: 0; }
+}
+@media (max-width: 620px) {
+  .gift-float { bottom: 80px; font-size: 13px; padding: 9px 15px 9px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gift-float { transition: none; }
+  .gift-float .gift-mark::after { animation: none; }
 }
 
 /* ---------- POPUP LEAD MAGNET (15 prompts IA) ---------- */
@@ -616,6 +724,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     <h1>Une histoire qui tient en haleine.<br>Même si vous n'avez pas&nbsp;la&nbsp;plume&nbsp;facile.</h1>
     <p class="lede">Racontez votre idée brute à une IA. Elle remplit le canevas avec les principes du livre. Vous rédigez, relisez, peaufinez — et le résultat vous ressemble.</p>
     <a href="#offre" class="btn">Découvrir le Pack Auteur Complet</a>
+    <button type="button" class="hero-gift-hint" id="heroGiftHint"><span class="diamond"></span>Pas encore prêt·e&nbsp;? 15 prompts IA offerts, sans engagement</button>
   </section>
 
   <section id="preuve">
@@ -886,10 +995,12 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
   <footer>Eros Kadima — Les Outils de l'Auteur<br><a href="https://wa.me/447451256734" target="_blank" rel="noopener" class="support-link">Support WhatsApp : +44 74 51 25 67 34</a></footer>
 </div>
 
-<div class="sticky-cta">
+<div class="sticky-cta" id="stickyCta">
   <div class="info"><span class="lbl">Pack Auteur Complet</span><br><span class="amt">9 900 FCFA</span></div>
   <a href="https://boutique.eroskadima.com/prd_miqemtit?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" class="btn buy-link" target="_blank" rel="noopener">Obtenir</a>
 </div>
+
+<button type="button" class="gift-float" id="giftFloatBtn"><span class="gift-mark"></span>15 prompts IA offerts</button>
 
 <div class="exit-popup-overlay" id="exitPopup" role="dialog" aria-modal="true" aria-labelledby="exitPopupTitle">
   <div class="exit-popup-card">
@@ -904,61 +1015,125 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 
 <script>
 /* ===== Popup lead magnet (15 prompts IA) =====
-   Se déclenche une seule fois par session, au premier des deux signaux :
+   Déclenchement AUTOMATIQUE, une seule fois par session, au premier des trois signaux :
    (1) intention de sortie desktop (curseur qui quitte la page par le haut),
-   (2) inactivité prolongée — sert de repli sur mobile, où il n'y a pas de mouseleave.
-   Un délai minimum évite de montrer le popup à quelqu'un qui vient d'arriver. */
+   (2) profondeur de scroll — atteint ~65% de la page sans avoir converti,
+   (3) inactivité prolongée — repli mobile, où il n'y a ni mouseleave ni vrai signal de sortie.
+   Un délai minimum évite de montrer le popup à quelqu'un qui vient d'arriver.
+   Déclenchement MANUEL, à tout moment et sans limite : le lien du hero et le bouton
+   flottant "15 prompts IA offerts" ouvrent le même popup à la demande. */
 (function() {
-  var MIN_DELAY_MS = 20000;   // rien avant 20s de lecture
-  var IDLE_MS = 25000;        // repli mobile : 25s sans interaction après le délai minimum
+  var MIN_DELAY_MS = 20000;        // rien avant 20s de lecture
+  var IDLE_MS = 25000;             // repli mobile : 25s sans interaction après le délai minimum
+  var SCROLL_DEPTH_TRIGGER = 0.65; // 65% de la hauteur de page parcourue
   var STORAGE_KEY = "outils_auteur_popup_vu";
-
-  if (sessionStorage.getItem(STORAGE_KEY)) return;
 
   var overlay = document.getElementById("exitPopup");
   var closeBtn = document.getElementById("exitPopupClose");
-  var eligible = false;
+  var giftFloatBtn = document.getElementById("giftFloatBtn");
+  var heroGiftHint = document.getElementById("heroGiftHint");
   var shown = false;
-  var idleTimer = null;
 
   function openPopup() {
-    if (shown) return;
     shown = true;
     overlay.classList.add("is-open");
     try { sessionStorage.setItem(STORAGE_KEY, "1"); } catch (e) {}
-    document.removeEventListener("mouseleave", onMouseLeave);
-    document.removeEventListener("mousemove", resetIdle);
-    document.removeEventListener("scroll", resetIdle);
-    document.removeEventListener("touchstart", resetIdle);
   }
 
   function closePopup() {
     overlay.classList.remove("is-open");
   }
 
+  closeBtn.addEventListener("click", closePopup);
+  overlay.addEventListener("click", function(e) { if (e.target === overlay) closePopup(); });
+  document.addEventListener("keydown", function(e) { if (e.key === "Escape") closePopup(); });
+
+  // déclenchement manuel : toujours actif, même si le popup automatique est déjà passé
+  function manualOpen(e) {
+    if (e) e.preventDefault();
+    openPopup();
+  }
+  if (giftFloatBtn) giftFloatBtn.addEventListener("click", manualOpen);
+  if (heroGiftHint) heroGiftHint.addEventListener("click", manualOpen);
+
+  // déclenchement automatique : une seule fois par session
+  if (sessionStorage.getItem(STORAGE_KEY)) return;
+
+  var eligible = false;
+  var idleTimer = null;
+
+  function autoOpen() {
+    if (shown) return;
+    openPopup();
+    document.removeEventListener("mouseleave", onMouseLeave);
+    document.removeEventListener("mousemove", resetIdle);
+    document.removeEventListener("scroll", onScroll);
+    document.removeEventListener("touchstart", resetIdle);
+  }
+
   function onMouseLeave(e) {
     if (!eligible) return;
-    if (e.clientY <= 0) openPopup();
+    if (e.clientY <= 0) autoOpen();
   }
 
   function resetIdle() {
     if (!eligible || shown) return;
     if (idleTimer) clearTimeout(idleTimer);
-    idleTimer = setTimeout(openPopup, IDLE_MS);
+    idleTimer = setTimeout(autoOpen, IDLE_MS);
   }
 
-  closeBtn.addEventListener("click", closePopup);
-  overlay.addEventListener("click", function(e) { if (e.target === overlay) closePopup(); });
-  document.addEventListener("keydown", function(e) { if (e.key === "Escape") closePopup(); });
+  function onScroll() {
+    resetIdle();
+    if (!eligible || shown) return;
+    var doc = document.documentElement;
+    var scrolled = window.scrollY + window.innerHeight;
+    var full = doc.scrollHeight;
+    if (full > 0 && (scrolled / full) >= SCROLL_DEPTH_TRIGGER) autoOpen();
+  }
 
   setTimeout(function() {
     eligible = true;
     document.addEventListener("mouseleave", onMouseLeave);
     document.addEventListener("mousemove", resetIdle);
-    document.addEventListener("scroll", resetIdle, { passive: true });
+    document.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("touchstart", resetIdle, { passive: true });
-    resetIdle();
+    onScroll();
   }, MIN_DELAY_MS);
+})();
+
+/* ===== CTA flottant + bouton cadeau : dynamiques au scroll =====
+   Apparaissent une fois le hero dépassé, disparaissent quand la section finale
+   (avec le vrai widget d'achat) est à l'écran, pour ne jamais dupliquer le CTA. */
+(function() {
+  var stickyCta = document.getElementById("stickyCta");
+  var giftFloat = document.getElementById("giftFloatBtn");
+  var hero = document.querySelector(".hero");
+  var finalSection = document.querySelector(".final");
+  if (!hero || !finalSection) return;
+
+  var pastHero = false;
+  var inFinal = false;
+
+  function refresh() {
+    var visible = pastHero && !inFinal;
+    if (stickyCta) stickyCta.classList.toggle("is-visible", visible);
+    if (giftFloat) giftFloat.classList.toggle("is-visible", visible);
+  }
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function(entries) {
+      pastHero = !entries[0].isIntersecting;
+      refresh();
+    }, { threshold: 0 }).observe(hero);
+
+    new IntersectionObserver(function(entries) {
+      inFinal = entries[0].isIntersecting;
+      refresh();
+    }, { threshold: 0.15 }).observe(finalSection);
+  } else {
+    pastHero = true;
+    refresh();
+  }
 })();
 </script>
 
