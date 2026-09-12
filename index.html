@@ -464,6 +464,46 @@ em { font-style: italic; color: var(--cream-dim); }
 .final .price-line { font-size: 20px; color: var(--cream-dim); margin-bottom: 30px; text-shadow: 0 2px 14px rgba(0,0,0,.6); }
 .final .price-line b { color: var(--bright-red); font-family: 'Cardo', serif; }
 
+/* ---------- CARTE SNAP (achat direct, sans redirection) ---------- */
+.snap-card {
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+  background: linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--deep-red);
+  box-shadow: inset 0 0 0 1px rgba(232,224,208,0.04), 0 20px 50px rgba(0,0,0,.55);
+  padding: 32px 26px 28px;
+}
+.snap-card::before, .snap-card::after {
+  content: "";
+  position: absolute;
+  width: 8px; height: 8px;
+  background: var(--bright-red);
+  transform: rotate(45deg);
+}
+.snap-card::before { top: -4px; left: -4px; }
+.snap-card::after { bottom: -4px; right: -4px; }
+.snap-covers { display: flex; justify-content: center; margin: 0 auto 20px; }
+.snap-covers img {
+  width: 58px;
+  border-radius: 2px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.5);
+  margin: 0 -7px;
+}
+.snap-covers img:nth-child(1) { transform: rotate(-9deg) translateY(5px); }
+.snap-covers img:nth-child(2) { transform: rotate(-3deg); z-index: 2; }
+.snap-covers img:nth-child(3) { transform: rotate(3deg); z-index: 2; }
+.snap-covers img:nth-child(4) { transform: rotate(9deg) translateY(5px); }
+.snap-tag {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-bottom: 18px;
+}
+.snap-tag svg { width: 12px; height: 12px; fill: var(--bright-red); vertical-align: -1px; margin-right: 5px; }
+.snap-widget-wrap { display: flex; justify-content: center; }
+
 footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 2.2; }
 .support-link { color: var(--bright-red); text-decoration: none; border-bottom: 1px solid var(--deep-red); }
 .support-link:hover { color: var(--cream); border-bottom-color: var(--bright-red); }
@@ -742,18 +782,32 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     <div class="rule"><span class="diamond"></span></div>
     <h2>Les deux méthodes, les deux canevas —<br>et deux romans complets offerts.</h2>
     <p class="price-line"><b>9 900 FCFA</b> au lieu de 15 000 FCFA à l'unité.</p>
+
     <!-- Test A/B : widget Chariow Snap (achat sans redirection) sur ce seul CTA final,
          pendant que les autres CTA du tunnel restent des liens classiques avec UTM
-         (comparaison possible entre les deux approches). -->
-    <div id="chariow-widget" data-product-id="prd_miqemtit"
-        data-store-domain="boutique.eroskadima.com"
-        data-style="tap"
-        data-border-style="rounded"
-        data-cta-width="xs"
-        data-cta-animation="none"
-        data-locale="fr"
-        data-primary-color="#d3402f"
-        data-background-color="#FFFFFF"></div>
+         (comparaison possible entre les deux approches). Habillé dans une carte au
+         gabarit de la charte (même cadre à coins-diamant que le stat-plate) pour que
+         le bouton Chariow, très nu par défaut, s'intègre au reste de la page. -->
+    <div class="snap-card">
+      <div class="snap-covers">
+        <img loading="lazy" src="images/nymphe.jpg" alt="Le Voile de la Nymphe">
+        <img loading="lazy" src="images/p1.jpg" alt="Livre 1">
+        <img loading="lazy" src="images/p3.jpg" alt="Livre 2">
+        <img loading="lazy" src="images/sombres.jpg" alt="Le Voile des Eaux Sombres">
+      </div>
+      <p class="snap-tag"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>Paiement sécurisé, sans quitter cette page</p>
+      <div class="snap-widget-wrap">
+        <div id="chariow-widget" data-product-id="prd_miqemtit"
+            data-store-domain="boutique.eroskadima.com"
+            data-style="tap"
+            data-border-style="rounded"
+            data-cta-width="xs"
+            data-cta-animation="none"
+            data-locale="fr"
+            data-primary-color="#d3402f"
+            data-background-color="#241010"></div>
+      </div>
+    </div>
     <script>
     (function() {
       var script = document.createElement('script');
