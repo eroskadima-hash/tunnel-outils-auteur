@@ -162,23 +162,36 @@ em { font-style: italic; color: var(--cream-dim); }
 .hero-gift-hint {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  margin: 20px auto 0;
-  background: none;
-  border: none;
+  gap: 11px;
+  margin: 24px auto 0;
+  background: rgba(211,64,47,.14);
+  border: 1px solid var(--red);
+  border-radius: 999px;
+  padding: 9px 22px 9px 10px;
   font-family: 'EB Garamond', Georgia, serif;
-  font-style: italic;
   font-size: 15px;
-  color: var(--cream-dim);
+  color: var(--cream);
   cursor: pointer;
-  padding: 4px 2px;
-  text-decoration: underline;
-  text-decoration-color: rgba(211,64,47,.45);
-  text-underline-offset: 5px;
-  transition: color .2s ease;
+  box-shadow: 0 4px 18px rgba(0,0,0,.25);
+  transition: background .2s ease, border-color .2s ease, transform .15s ease, box-shadow .15s ease;
 }
-.hero-gift-hint .diamond { width: 6px; height: 6px; }
-.hero-gift-hint:hover { color: var(--cream); }
+.hero-gift-hint .gift-badge {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--bright-red);
+  padding: 4px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.hero-gift-hint:hover {
+  background: rgba(211,64,47,.24);
+  border-color: var(--bright-red);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(0,0,0,.32);
+}
 
 /* ---------- PREUVE ---------- */
 .proof-grid {
@@ -524,6 +537,10 @@ em { font-style: italic; color: var(--cream-dim); }
 }
 .snap-tag svg { width: 12px; height: 12px; fill: var(--bright-red); vertical-align: -1px; margin-right: 5px; }
 .snap-widget-wrap { display: flex; justify-content: center; }
+/* emplacement générique d'un widget Snap (boutons d'achat individuels, sticky-cta) —
+   inline-flex pour s'insérer proprement dans une grid row ou un flex row existant,
+   min-height pour éviter un saut de mise en page pendant le chargement asynchrone du script */
+.snap-slot { display: inline-flex; align-items: center; min-height: 34px; }
 
 footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 2.2; }
 .support-link { color: var(--bright-red); text-decoration: none; border-bottom: 1px solid var(--deep-red); }
@@ -724,7 +741,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     <h1>Une histoire qui tient en haleine.<br>Même si vous n'avez pas&nbsp;la&nbsp;plume&nbsp;facile.</h1>
     <p class="lede">Racontez votre idée brute à une IA. Elle remplit le canevas avec les principes du livre. Vous rédigez, relisez, peaufinez — et le résultat vous ressemble.</p>
     <a href="#offre" class="btn">Découvrir le Pack Auteur Complet</a>
-    <button type="button" class="hero-gift-hint" id="heroGiftHint"><span class="diamond"></span>Pas encore prêt·e&nbsp;? 15 prompts IA offerts, sans engagement</button>
+    <button type="button" class="hero-gift-hint" id="heroGiftHint"><span class="gift-badge">Offert</span>15 prompts IA pour démarrer — sans engagement</button>
   </section>
 
   <section id="preuve">
@@ -888,7 +905,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
       </div>
       <p class="price"><span class="old">15 000 FCFA</span>9 900 FCFA</p>
       <p class="bonus-note">+ <em>Le Voile de la Nymphe</em> et <em>Le Voile des Eaux Sombres</em> offerts — non disponibles séparément ici.</p>
-      <a href="https://boutique.eroskadima.com/prd_miqemtit?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" class="btn buy-link" target="_blank" rel="noopener">Obtenir le Pack Auteur Complet</a>
+      <div class="snap-widget-wrap"><div class="buy-link snap-slot" data-product-id="prd_miqemtit" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Obtenir le Pack Auteur Complet"></div></div>
     </div>
     <p class="trust-line"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>Livraison immédiate par email via Chariow · Paiement sécurisé · Satisfait ou remboursé sous 7 jours</p>
   </section>
@@ -898,13 +915,13 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     <div class="rule"><span class="diamond"></span></div>
     <h2 style="text-align:center; margin-bottom:34px;">Vous savez déjà ce qu'il vous faut ?</h2>
     <div class="buy-list">
-      <div class="buy-row"><span class="name">L'Art d'Écrire un Roman Érotique</span><span class="amt">4 000 FCFA</span><a class="btn btn-ghost btn-small buy-link" href="https://boutique.eroskadima.com/prd_2uhu05qo?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" target="_blank" rel="noopener">Acheter</a></div>
-      <div class="buy-row"><span class="name">Canevas Roman Érotique</span><span class="amt">3 000 FCFA</span><a class="btn btn-ghost btn-small buy-link" href="https://boutique.eroskadima.com/prd_12gdcd5a?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" target="_blank" rel="noopener">Acheter</a></div>
-      <div class="buy-row"><span class="name">L'Art de Construire une Tension</span><span class="amt">4 500 FCFA</span><a class="btn btn-ghost btn-small buy-link" href="https://boutique.eroskadima.com/prd_z5nkm07p?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" target="_blank" rel="noopener">Acheter</a></div>
-      <div class="buy-row"><span class="name">Canevas Construire une Tension</span><span class="amt">3 500 FCFA</span><a class="btn btn-ghost btn-small buy-link" href="https://boutique.eroskadima.com/prd_6xdvun2d?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" target="_blank" rel="noopener">Acheter</a></div>
-      <div class="buy-row"><span class="name">Pack Roman Érotique</span><span class="amt">5 500 FCFA</span><a class="btn btn-ghost btn-small buy-link" href="https://boutique.eroskadima.com/prd_ngww8sik?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" target="_blank" rel="noopener">Acheter</a></div>
-      <div class="buy-row"><span class="name">Pack Tension</span><span class="amt">6 500 FCFA</span><a class="btn btn-ghost btn-small buy-link" href="https://boutique.eroskadima.com/prd_8mqbqtwl?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" target="_blank" rel="noopener">Acheter</a></div>
-      <div class="buy-row featured"><span class="name">Pack Auteur Complet <span class="dim" style="font-size:13px;">— 2 romans offerts</span></span><span class="amt">9 900 FCFA</span><a class="btn btn-small buy-link" href="https://boutique.eroskadima.com/prd_miqemtit?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" target="_blank" rel="noopener">Acheter</a></div>
+      <div class="buy-row"><span class="name">L'Art d'Écrire un Roman Érotique</span><span class="amt">4 000 FCFA</span><div class="buy-link snap-slot" data-product-id="prd_2uhu05qo" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="xs" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Acheter"></div></div>
+      <div class="buy-row"><span class="name">Canevas Roman Érotique</span><span class="amt">3 000 FCFA</span><div class="buy-link snap-slot" data-product-id="prd_12gdcd5a" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="xs" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Acheter"></div></div>
+      <div class="buy-row"><span class="name">L'Art de Construire une Tension</span><span class="amt">4 500 FCFA</span><div class="buy-link snap-slot" data-product-id="prd_z5nkm07p" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="xs" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Acheter"></div></div>
+      <div class="buy-row"><span class="name">Canevas Construire une Tension</span><span class="amt">3 500 FCFA</span><div class="buy-link snap-slot" data-product-id="prd_6xdvun2d" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="xs" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Acheter"></div></div>
+      <div class="buy-row"><span class="name">Pack Roman Érotique</span><span class="amt">5 500 FCFA</span><div class="buy-link snap-slot" data-product-id="prd_ngww8sik" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="xs" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Acheter"></div></div>
+      <div class="buy-row"><span class="name">Pack Tension</span><span class="amt">6 500 FCFA</span><div class="buy-link snap-slot" data-product-id="prd_8mqbqtwl" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="xs" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Acheter"></div></div>
+      <div class="buy-row featured"><span class="name">Pack Auteur Complet <span class="dim" style="font-size:13px;">— 2 romans offerts</span></span><span class="amt">9 900 FCFA</span><div class="buy-link snap-slot" data-product-id="prd_miqemtit" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="xs" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Acheter"></div></div>
     </div>
     <p class="trust-line"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>Livraison immédiate par email via Chariow · Paiement sécurisé · Satisfait ou remboursé sous 7 jours</p>
   </section>
@@ -952,11 +969,11 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     <h2>Les deux méthodes, les deux canevas —<br>et deux romans complets offerts.</h2>
     <p class="price-line"><b>9 900 FCFA</b> au lieu de 15 000 FCFA à l'unité.</p>
 
-    <!-- Test A/B : widget Chariow Snap (achat sans redirection) sur ce seul CTA final,
-         pendant que les autres CTA du tunnel restent des liens classiques avec UTM
-         (comparaison possible entre les deux approches). Habillé dans une carte au
+    <!-- Widget Chariow Snap (achat sans redirection) — habillé dans une carte au
          gabarit de la charte (même cadre à coins-diamant que le stat-plate) pour que
-         le bouton Chariow, très nu par défaut, s'intègre au reste de la page. -->
+         le bouton Chariow, très nu par défaut, s'intègre au reste de la page. Tous les
+         CTA du tunnel utilisent désormais Snap (voir le helper snap() en haut du fichier) ;
+         le chargement du script/CSS du widget est mutualisé en bas de page, une seule fois. -->
     <div class="snap-card">
       <div class="snap-covers">
         <img loading="lazy" src="images/nymphe.jpg" alt="Le Voile de la Nymphe">
@@ -965,31 +982,8 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
         <img loading="lazy" src="images/sombres.jpg" alt="Le Voile des Eaux Sombres">
       </div>
       <p class="snap-tag"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>Paiement sécurisé, sans quitter cette page</p>
-      <div class="snap-widget-wrap">
-        <div id="chariow-widget" data-product-id="prd_miqemtit"
-            data-store-domain="boutique.eroskadima.com"
-            data-style="tap"
-            data-border-style="rounded"
-            data-cta-width="xs"
-            data-cta-animation="none"
-            data-locale="fr"
-            data-primary-color="#d3402f"
-            data-background-color="#241010"></div>
-      </div>
+      <div class="snap-widget-wrap"><div class="buy-link snap-slot" data-product-id="prd_miqemtit" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="sm" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Obtenir le Pack Auteur Complet"></div></div>
     </div>
-    <script>
-    (function() {
-      var script = document.createElement('script');
-      script.src = 'https://js.chariowcdn.com/v1/widget.min.js';
-      script.async = true;
-      document.head.appendChild(script);
-
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://js.chariowcdn.com/v1/widget.min.css';
-      document.head.appendChild(link);
-    })();
-    </script>
   </section>
 
   <footer>Eros Kadima — Les Outils de l'Auteur<br><a href="https://wa.me/447451256734" target="_blank" rel="noopener" class="support-link">Support WhatsApp : +44 74 51 25 67 34</a></footer>
@@ -997,7 +991,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 
 <div class="sticky-cta" id="stickyCta">
   <div class="info"><span class="lbl">Pack Auteur Complet</span><br><span class="amt">9 900 FCFA</span></div>
-  <a href="https://boutique.eroskadima.com/prd_miqemtit?utm_source=tunnel&utm_medium=cta&utm_campaign=outils_auteur" class="btn buy-link" target="_blank" rel="noopener">Obtenir</a>
+  <div class="buy-link snap-slot" data-product-id="prd_miqemtit" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="sm" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Obtenir"></div>
 </div>
 
 <button type="button" class="gift-float" id="giftFloatBtn"><span class="gift-mark"></span>15 prompts IA offerts</button>
@@ -1008,7 +1002,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     <p class="exit-popup-eyebrow">Pas encore prêt·e à commander ?</p>
     <h3 id="exitPopupTitle">15 prompts IA offerts</h3>
     <p class="desc">Pour démarrer, débloquer une scène ou trouver le bon ton — à copier-coller directement dans ton IA. Gratuit, livré par email.</p>
-    <a href="https://boutique.eroskadima.com/prd_jgulxvws?utm_source=tunnel&utm_medium=popup&utm_campaign=prompts_ia" class="btn" target="_blank" rel="noopener" id="exitPopupCta">Recevoir les 15 prompts</a>
+    <div class="snap-widget-wrap"><div class="buy-link snap-slot" data-product-id="prd_jgulxvws" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Recevoir les 15 prompts"></div></div>
     <p class="exit-popup-fine">Sans engagement — le Pack Auteur Complet reste disponible juste au-dessus.</p>
   </div>
 </div>
@@ -1134,6 +1128,26 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     pastHero = true;
     refresh();
   }
+})();
+</script>
+
+<script>
+/* ===== Widget Chariow Snap : chargement mutualisé =====
+   Charge le script + le CSS du widget UNE SEULE FOIS, ici, après que tous les
+   emplacements ".snap-slot" (boutons d'achat individuels, carte Pack Auteur
+   Complet, CTA flottant, carte finale) sont déjà présents dans le DOM — le
+   widget scanne la page par attribut data-product-id, pas par id unique, donc
+   un seul chargement suffit à initialiser tous les boutons d'un coup. */
+(function() {
+  var script = document.createElement('script');
+  script.src = 'https://js.chariowcdn.com/v1/widget.min.js';
+  script.async = true;
+  document.head.appendChild(script);
+
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://js.chariowcdn.com/v1/widget.min.css';
+  document.head.appendChild(link);
 })();
 </script>
 
