@@ -1186,6 +1186,49 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 })();
 </script>
 
+<script>
+/* ===== Google Analytics 4 (GA4) =====
+   Remplacez GA4_ID_A_REMPLACER ci-dessous par votre identifiant de mesure
+   (analytics.google.com → Admin → colonne "Propriété" → Créer une propriété →
+   pendant la config, choisir "Web" comme flux de données → l'identifiant affiché
+   ensuite au format G-XXXXXXXXXX est votre "ID de mesure" : c'est celui-là).
+   Tant que ce n'est pas fait, ce bloc ne fait rien (aucune erreur, aucun envoi).
+
+   À quoi ça sert ici : depuis que tous les CTA passent par le widget Snap (voir
+   plus haut dans ce fichier), il n'y a plus d'URL avec UTM pour distinguer dans
+   Chariow ce qui vient du tunnel. GA4 prend le relais pour ça : en plus des
+   pages vues (suivies automatiquement), ce bloc envoie un événement à chaque
+   clic sur un bouton d'achat — generate_lead pour le PDF gratuit, begin_checkout
+   pour les CTA payants — avec le nom du produit concerné. Dans Google Analytics,
+   ces événements apparaissent dans Rapports → Cycle de vie → Engagement →
+   Événements (ou en direct dans Rapports → Temps réel pendant les tests). */
+(function() {
+  var GA4_ID = "G-1RSDBCE26D";
+  if (GA4_ID === "GA4_ID_A_REMPLACER") return;
+  var gaScript = document.createElement('script');
+  gaScript.async = true;
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+  document.head.appendChild(gaScript);
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', GA4_ID);
+
+  var LEADMAGNET_ID = "prd_jgulxvws";
+  document.querySelectorAll('.buy-link').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var productId = el.getAttribute('data-product-id');
+      var label = el.getAttribute('data-custom-cta-text') || productId;
+      if (productId === LEADMAGNET_ID) {
+        gtag('event', 'generate_lead', { item_id: productId, item_name: label });
+      } else {
+        gtag('event', 'begin_checkout', { item_id: productId, item_name: label });
+      }
+    });
+  });
+})();
+</script>
+
 <!-- Vercel Web Analytics : compte de pages vues + clics, sans cookie, RGPD-friendly.
      Ne fait rien tant que "Analytics" n'est pas activé dans le dashboard Vercel du
      projet (script servi par Vercel lui-même à cette adresse une fois activé). -->
