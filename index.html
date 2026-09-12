@@ -536,11 +536,19 @@ em { font-style: italic; color: var(--cream-dim); }
   margin-bottom: 18px;
 }
 .snap-tag svg { width: 12px; height: 12px; fill: var(--bright-red); vertical-align: -1px; margin-right: 5px; }
-.snap-widget-wrap { display: flex; justify-content: center; }
+.snap-widget-wrap { display: flex; justify-content: center; width: 100%; }
+/* Dans un emplacement "pleine largeur" (carte Pack Complet, popup, section finale), le
+   bouton que Chariow injecte est lui-même en width:100% — sans largeur explicite sur ce
+   conteneur, la résolution de ce pourcentage est ambiguë (conteneur en shrink-to-fit) et
+   peut provoquer un rendu tronqué le temps que le widget charge. width:100% ici lève
+   l'ambiguïté une fois pour toutes. */
+.snap-widget-wrap .snap-slot { width: 100%; max-width: 380px; }
 /* emplacement générique d'un widget Snap (boutons d'achat individuels, sticky-cta) —
-   inline-flex pour s'insérer proprement dans une grid row ou un flex row existant,
-   min-height pour éviter un saut de mise en page pendant le chargement asynchrone du script */
-.snap-slot { display: inline-flex; align-items: center; min-height: 34px; }
+   inline-flex pour s'insérer proprement dans une grid row ou un flex row existant.
+   min-height = hauteur réelle du bouton Chariow rendu (mesurée en direct) : réserve la
+   bonne place dès le premier paint pour qu'il n'y ait aucun saut de mise en page ni
+   apparence "à moitié affichée" le temps que le script widget.min.js charge et rende. */
+.snap-slot { display: inline-flex; align-items: center; min-height: 48px; }
 
 footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 2.2; }
 .support-link { color: var(--bright-red); text-decoration: none; border-bottom: 1px solid var(--deep-red); }
@@ -640,6 +648,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 }
 .gift-float.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .gift-float:hover { border-color: var(--bright-red); }
+.gift-float .gift-label-short { display: none; }
 .gift-float .gift-mark { position: relative; width: 8px; height: 8px; flex-shrink: 0; }
 .gift-float .gift-mark::before {
   content: '';
@@ -661,7 +670,12 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
   100% { transform: scale(2); opacity: 0; }
 }
 @media (max-width: 620px) {
-  .gift-float { bottom: 80px; font-size: 13px; padding: 9px 15px 9px 12px; }
+  /* Version compacte (icône + un mot) sur mobile : moins de surface qui recouvre
+     le contenu défilant derrière, et davantage d'écart au-dessus du CTA flottant
+     du bas pour ne jamais se chevaucher avec son bouton Snap. */
+  .gift-float { bottom: 96px; font-size: 13px; padding: 10px 16px 10px 12px; gap: 7px; }
+  .gift-float .gift-label-full { display: none; }
+  .gift-float .gift-label-short { display: inline; }
 }
 @media (prefers-reduced-motion: reduce) {
   .gift-float { transition: none; }
@@ -994,7 +1008,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
   <div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_miqemtit" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="sm" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Obtenir"></div>
 </div>
 
-<button type="button" class="gift-float" id="giftFloatBtn"><span class="gift-mark"></span>15 prompts IA offerts</button>
+<button type="button" class="gift-float" id="giftFloatBtn"><span class="gift-mark"></span><span class="gift-label-full">15 prompts IA offerts</span><span class="gift-label-short">Offert</span></button>
 
 <div class="exit-popup-overlay" id="exitPopup" role="dialog" aria-modal="true" aria-labelledby="exitPopupTitle">
   <div class="exit-popup-card">
