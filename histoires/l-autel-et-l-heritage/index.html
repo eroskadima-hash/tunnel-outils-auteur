@@ -237,6 +237,13 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
   border: 1px solid var(--line); background: var(--surface);
   font-size: 13.5px; color: var(--cream-dim); line-height: 1.6; text-align: center;
 }
+.story-lesson {
+  max-width: 620px; margin: 46px auto 0; padding: 26px 28px;
+  border: 1px solid var(--deep-red); background: var(--surface);
+  text-align: center;
+}
+.story-lesson .eyebrow { margin-bottom: 12px; }
+.story-lesson p { color: var(--cream); font-size: 16px; line-height: 1.75; margin: 0; }
 .story-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
 .story-mature-tag {
   display: inline-block; padding: 5px 14px;
@@ -283,12 +290,13 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 
 <div class="frame">
 
-  <section id="story-start" style="padding-top:48px;">
+  <section style="padding-top:48px;">
     <a class="story-back" href="/histoires/">← Toutes les histoires</a>
     <div class="story-tags"><span class="story-mature-tag">Contenu explicite — lectorat adulte</span></div>
     <p class="story-meta">D'après une histoire vraie</p>
     <h1 class="story-title">L'Autel et l'Héritage</h1>
     <div class="story-header-img" style="--story-img: url('/images/histoires/l-autel-et-l-heritage.jpg');"></div>
+    <div id="story-marker"></div>
     <div class="story-body">
         <p>La pluie tombait comme une sentence.</p>
         <p>Sevyn n'avait pas eu besoin d'ouvrir la porte pour savoir qui frappait ainsi, à corps perdu, contre le bois gonflé d'humidité. Elle la reconnut au tremblement de la poignée, à cette façon hésitante de cogner qui trahissait une femme qui n'avait jamais demandé refuge à personne.</p>
@@ -336,6 +344,16 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
         <p>Elle ne reprit pas sa croix. Elle la laissa sur la natte, comme on laisse une chose qu'on n'a plus besoin de porter contre soi pour croire.</p>
         <p>Dehors, le village s'éveillait sans savoir qu'une nuit avait suffi à fonder, entre ces deux femmes, une foi nouvelle — secrète, charnelle, et plus vraie qu'aucune des deux religions qui l'avaient rendue impossible.</p>
     </div>
+    <div class="story-lesson">
+      <p class="eyebrow">Ce qu'on en retient</p>
+      <p>Ce n'est pas l'interdit lui-même qui bouleverse Grâce — c'est tout le temps passé à lui résister avant d'y céder. Elle ne bascule pas parce qu'elle cède facilement ; elle bascule parce qu'elle a longtemps tenu. Construire un désir qui marque durablement le lecteur commence toujours par construire la résistance qui le précède : c'est exactement ce que la méthode du Pack Auteur Complet apprend à reproduire, histoire après histoire.</p>
+    </div>
+    <div class="histoire-cta-band" style="margin-top:34px;">
+      <p class="eyebrow">Si cette histoire vous parle</p>
+      <h2 class="section-title" style="font-size:22px;">C'est cette méthode que j'enseigne</h2>
+      <span class="amt">Pack Auteur Complet — 9 900 FCFA</span>
+      <div class="snap-widget-wrap"><div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_miqemtit" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Obtenir le Pack Complet"></div></div>
+    </div>
     <div class="story-end-note">
       <b>Note :</b> les noms, lieux et détails identifiants sont modifiés ou romancés. Rien n'est publié ici sans l'accord explicite des personnes concernées.
     </div>
@@ -351,11 +369,14 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 </div>
 
 <script>
-/* CTA sticky : apparaît une fois l'intro dépassée, reste visible tout le long
-   de l'histoire (pas de "final" à éviter ici, contrairement au tunnel). */
+/* CTA sticky : apparaît dès que le lecteur dépasse le début de l'histoire
+   (petit marqueur juste avant le texte), et reste visible tout du long —
+   y compris jusqu'à la fin (pas de "final" à éviter ici, contrairement au
+   tunnel). Le marqueur doit être un point précis, pas toute la section,
+   sinon l'observateur ne se déclenche qu'après avoir dépassé tout le texte. */
 (function() {
   var stickyCta = document.getElementById("stickyCta");
-  var marker = document.getElementById("story-start");
+  var marker = document.getElementById("story-marker");
   if (!stickyCta || !marker) return;
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(function(entries) {
