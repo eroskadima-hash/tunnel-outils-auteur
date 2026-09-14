@@ -1,0 +1,380 @@
+<meta charset="utf-8">
+<title>D'après une histoire vraie — Eros Kadima</title>
+<meta name="description" content="Des histoires vraies, avec l'accord des personnes concernées, reformulées avec la même méthode de tension narrative enseignée dans Les Outils de l'Auteur.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0809'/%3E%3Cpath d='M50 20 L64 50 L50 80 L36 50 Z' fill='%23d3402f'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="D'après une histoire vraie — Eros Kadima">
+<meta property="og:description" content="Des histoires vraies, reformulées avec la méthode de tension narrative des Outils de l'Auteur.">
+<meta property="og:url" content="https://livres.eroskadima.com/histoires/">
+<meta property="og:image" content="https://livres.eroskadima.com/images/hero-histoires.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="/images/hero-histoires.jpg">
+<style>
+
+:root {
+  --ink: #0a0809;
+  --surface: #170d0d;
+  --surface-2: #241010;
+  --line: #3a1113;
+  --deep-red: #750f16;
+  --red: #a81822;
+  --bright-red: #d3402f;
+  --cream: #e8e0d0;
+  --cream-dim: #b7a892;
+}
+* { box-sizing: border-box; }
+html { background: var(--ink); }
+body {
+  margin: 0;
+  background: radial-gradient(ellipse 120% 70% at 50% -10%, #2a0f10 0%, var(--ink) 55%), var(--ink);
+  color: var(--cream);
+  font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.frame { max-width: 780px; margin: 0 auto; padding: 0 20px; position: relative; }
+.frame::before, .frame::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--line) 8%, var(--line) 92%, transparent);
+}
+.frame::before { left: 6px; }
+.frame::after { right: 6px; }
+h1, h2, h3 { font-family: 'Cardo', Georgia, 'Times New Roman', serif; font-weight: 700; color: var(--bright-red); margin: 0; text-wrap: balance; }
+.eyebrow { font-family: 'EB Garamond', Georgia, serif; font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream-dim); text-align: center; margin: 0 0 14px; }
+.rule { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 10px 0 30px; }
+.rule::before, .rule::after { content: ""; width: 70px; height: 1px; background: var(--deep-red); }
+.diamond { width: 9px; height: 9px; background: var(--bright-red); transform: rotate(45deg); flex: none; }
+section { padding: 72px 0; position: relative; }
+section + section { border-top: 1px solid var(--line); }
+p { margin: 0 0 1em; }
+.dim { color: var(--cream-dim); }
+em { font-style: italic; color: var(--cream-dim); }
+
+.hero {
+  width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+  min-height: clamp(420px, 58vh, 560px);
+  padding: 56px 20px 56px;
+  text-align: center; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+  background-image:
+    linear-gradient(180deg, rgba(10,8,9,.55) 0%, rgba(10,8,9,.25) 35%, rgba(10,8,9,.66) 70%, var(--ink) 100%),
+    radial-gradient(ellipse 90% 65% at 50% 12%, rgba(117,15,22,.30), transparent 60%);
+  background-color: var(--surface);
+  background-size: cover; background-position: center 30%; background-repeat: no-repeat;
+}
+.hero .eyebrow { margin-bottom: 20px; text-shadow: 0 2px 16px rgba(0,0,0,.7); }
+.hero h1 { font-size: clamp(30px, 5.4vw, 46px); line-height: 1.16; margin-bottom: 22px; text-shadow: 0 4px 24px rgba(0,0,0,.75); }
+.hero .lede { font-style: italic; font-size: 19px; color: var(--cream-dim); max-width: 560px; margin: 0 auto 30px; text-shadow: 0 2px 16px rgba(0,0,0,.7); }
+
+.btn {
+  display: inline-block; font-family: 'EB Garamond', Georgia, serif; font-size: 16px; letter-spacing: 0.06em;
+  text-transform: uppercase; text-decoration: none; color: var(--cream);
+  background: linear-gradient(180deg, var(--red), var(--deep-red));
+  border: 1px solid var(--bright-red); padding: 14px 30px; border-radius: 2px;
+  box-shadow: 0 8px 24px rgba(168,24,34,0.28); transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(168,24,34,0.4); }
+.btn-ghost { background: transparent; border: 1px solid var(--deep-red); color: var(--cream-dim); }
+.btn-block { display: block; text-align: center; }
+.btn-small { padding: 10px 22px; font-size: 14px; }
+
+.faq-item { border-bottom: 1px solid var(--line); padding: 22px 0; }
+.faq-item:first-child { border-top: 1px solid var(--line); }
+.faq-q { font-family: 'Cardo', serif; font-weight: 700; color: var(--cream); font-size: 18px; margin: 0 0 10px; }
+.faq-a { color: var(--cream-dim); margin: 0; }
+
+.support-link { color: var(--bright-red); text-decoration: none; border-bottom: 1px solid var(--deep-red); }
+.support-link:hover { color: var(--cream); border-bottom-color: var(--bright-red); }
+
+footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 2.2; }
+
+.section-title { text-align: center; font-size: clamp(26px, 4vw, 34px); margin-bottom: 16px; }
+.section-lede { text-align: center; color: var(--cream-dim); max-width: 560px; margin: 0 auto 50px; }
+
+.trust-line { text-align: center; font-size: 13.5px; color: var(--cream-dim); margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.trust-line svg { flex: none; }
+
+@media (max-width: 620px) {
+  section { padding: 56px 0; }
+}
+
+
+/* ---------- NAV COMMUNE ---------- */
+.sitenav {
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(10,8,9,.93);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.navframe {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.navbrand {
+  font-family: 'Cardo', Georgia, serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--cream);
+  text-decoration: none;
+  letter-spacing: .02em;
+  flex: none;
+}
+.navlinks { display: flex; gap: 22px; flex-wrap: wrap; }
+.navlinks a {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 15px;
+  color: var(--cream-dim);
+  text-decoration: none;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color .2s ease, border-color .2s ease;
+  white-space: nowrap;
+}
+.navlinks a:hover { color: var(--cream); }
+.navlinks a.active { color: var(--bright-red); border-bottom-color: var(--bright-red); }
+@media (max-width: 560px) {
+  .navframe { padding: 12px 16px; gap: 10px; }
+  .navbrand { font-size: 14px; }
+  .navlinks { gap: 14px; }
+  .navlinks a { font-size: 13px; }
+}
+
+
+/* ---------- WIDGET CHARIOW SNAP (achat direct, sans redirection) ---------- */
+.snap-widget-wrap { display: flex; justify-content: center; width: 100%; }
+.snap-widget-wrap .snap-slot { width: 100%; }
+.snap-slot { display: inline-flex; align-items: center; min-height: 48px; }
+
+
+/* ---------- INDEX DES HISTOIRES (vignette + amorce) ---------- */
+.story-intro { max-width: 620px; margin: 0 auto; text-align: center; }
+.story-disclaimer {
+  max-width: 560px; margin: 22px auto 0; padding: 14px 18px;
+  border: 1px solid var(--line); background: var(--surface);
+  font-size: 13.5px; color: var(--cream-dim); line-height: 1.6; text-align: left;
+}
+.story-disclaimer b { color: var(--cream); }
+
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+@media (max-width: 680px) { .story-grid { grid-template-columns: 1fr; } }
+.story-card {
+  display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--line);
+  text-decoration: none; color: inherit; overflow: hidden;
+  transition: border-color .2s ease, transform .2s ease;
+}
+.story-card:hover { border-color: var(--deep-red); transform: translateY(-2px); }
+.story-card-img {
+  aspect-ratio: 16 / 10; width: 100%;
+  background-image:
+    linear-gradient(160deg, rgba(117,15,22,.35), rgba(10,8,9,.55)),
+    var(--story-img, none);
+  background-size: cover; background-position: center;
+  background-color: var(--surface-2);
+  display: flex; align-items: flex-end; padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.story-card-tag {
+  display: inline-block; padding: 4px 12px; border-radius: 999px;
+  border: 1px solid var(--bright-red); background: rgba(10,8,9,.55);
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--bright-red);
+}
+.story-card-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex-grow: 1; }
+.story-card h3 { font-size: 21px; line-height: 1.28; margin-bottom: 10px; }
+.story-card-excerpt { color: var(--cream-dim); font-size: 15.5px; margin-bottom: 18px; flex-grow: 1; }
+.story-card-link {
+  font-family: 'EB Garamond', Georgia, serif; font-size: 14.5px; letter-spacing: .04em;
+  color: var(--bright-red); text-transform: uppercase;
+}
+.story-card:hover .story-card-link { color: var(--cream); }
+
+.histoire-cta-band {
+  max-width: 560px; margin: 0 auto; text-align: center;
+  padding: 30px 26px; background: linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--deep-red);
+}
+.histoire-cta-band .amt { font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red); font-size: 24px; display: block; margin: 8px 0 20px; }
+
+/* ---------- PAGE HISTOIRE INDIVIDUELLE ---------- */
+.story-back {
+  display: inline-block; font-size: 14px; color: var(--cream-dim); text-decoration: none;
+  border-bottom: 1px solid var(--line); margin-bottom: 26px;
+}
+.story-back:hover { color: var(--bright-red); border-color: var(--deep-red); }
+.story-meta {
+  text-align: center; font-size: 13px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--cream-dim); margin-bottom: 10px;
+}
+.story-title { text-align: center; max-width: 680px; margin: 0 auto 20px; }
+.story-header-img {
+  aspect-ratio: 16 / 8; width: 100%; margin: 0 auto 38px; max-width: 680px;
+  background-image:
+    linear-gradient(160deg, rgba(117,15,22,.35), rgba(10,8,9,.4)),
+    var(--story-img, none);
+  background-size: cover; background-position: center; background-color: var(--surface-2);
+  border: 1px solid var(--line);
+}
+.story-body { max-width: 640px; margin: 0 auto; font-size: 18px; line-height: 1.85; color: var(--cream); }
+.story-body p { margin: 0 0 1.3em; }
+.story-body p:first-of-type::first-letter {
+  font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red);
+  font-size: 3.6em; float: left; line-height: .82; margin: .06em .1em 0 0;
+}
+.story-body em { font-style: italic; color: var(--cream-dim); }
+.story-example-tag {
+  display: inline-block; margin-bottom: 24px; padding: 5px 14px;
+  border: 1px solid var(--deep-red); border-radius: 999px;
+  font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--bright-red);
+}
+.story-end-note {
+  max-width: 560px; margin: 44px auto 0; padding: 14px 18px;
+  border: 1px solid var(--line); background: var(--surface);
+  font-size: 13.5px; color: var(--cream-dim); line-height: 1.6; text-align: center;
+}
+.story-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
+.story-mature-tag {
+  display: inline-block; padding: 5px 14px;
+  border: 1px solid var(--line); border-radius: 999px;
+  font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--cream-dim);
+}
+.story-divider { display: flex; align-items: center; justify-content: center; margin: 34px 0; }
+.story-divider .diamond { width: 8px; height: 8px; background: var(--deep-red); transform: rotate(45deg); }
+
+/* ---------- CTA STICKY (accompagne la lecture) ---------- */
+.sticky-cta {
+  position: fixed; left: 50%; bottom: -100px; transform: translateX(-50%);
+  z-index: 70; display: flex; align-items: center; gap: 16px;
+  background: linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--deep-red); box-shadow: 0 12px 34px rgba(0,0,0,.5);
+  padding: 12px 18px; opacity: 0; pointer-events: none;
+  transition: opacity .3s ease, bottom .3s ease;
+  width: calc(100% - 32px); max-width: 420px;
+}
+.sticky-cta.is-visible { opacity: 1; pointer-events: auto; bottom: 18px; }
+.sticky-cta .info { line-height: 1.25; flex: none; }
+.sticky-cta .info .lbl { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-dim); }
+.sticky-cta .info .amt { font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red); font-size: 17px; }
+.sticky-cta .snap-slot { min-height: 40px; }
+@media (prefers-reduced-motion: reduce) { .sticky-cta { transition: none; } }
+
+.hero-histoires {
+  background-image:
+    linear-gradient(180deg, rgba(10,8,9,.55) 0%, rgba(10,8,9,.25) 35%, rgba(10,8,9,.66) 70%, var(--ink) 100%),
+    radial-gradient(ellipse 90% 65% at 50% 12%, rgba(117,15,22,.30), transparent 60%),
+    url('/images/hero-histoires.jpg');
+  background-size: cover; background-position: center 25%; background-repeat: no-repeat;
+  background-color: var(--surface);
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,700&family=EB+Garamond:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,700&family=EB+Garamond:ital@0;1&display=swap"></noscript>
+
+<nav class="sitenav">
+  <div class="navframe">
+    <a href="/" class="navbrand">Eros Kadima</a>
+    <div class="navlinks">
+      <a href="/">Outils de l'Auteur</a>
+      <a href="/services/">Services</a>
+      <a href="/chansons/">Chansons</a>
+      <a href="/histoires/" class="active">Histoires</a>
+    </div>
+  </div>
+</nav>
+
+<div class="frame">
+
+  <section class="hero hero-histoires">
+    <p class="eyebrow">Les Outils de l'Auteur — Eros Kadima</p>
+    <h1>D'après une histoire vraie.</h1>
+    <p class="lede">Des histoires vécues, avec l'accord des personnes concernées, réécrites ici avec la même méthode de tension narrative que j'enseigne dans le Pack Auteur Complet — la preuve en train de se lire.</p>
+  </section>
+
+  <section>
+    <div class="story-intro">
+      <p class="eyebrow">D'après une histoire vraie</p>
+      <h2 class="section-title">Ce que vous allez lire</h2>
+      <p class="section-lede">Chaque texte part d'un fait réel — le mien ou celui de quelqu'un qui m'a donné son accord — puis passe par le même travail de réécriture que celui que j'enseigne : construire la tension, doser ce qu'on révèle, choisir où couper.</p>
+      <div class="story-disclaimer">
+        <b>Note :</b> les noms, lieux et détails identifiants sont modifiés ou romancés. Rien n'est publié ici sans l'accord explicite des personnes concernées, y compris pour mes propres histoires.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Les histoires</p>
+    <h2 class="section-title">Choisissez une histoire</h2>
+    <p class="section-lede">Une vignette, un début — cliquez pour lire le texte en entier.</p>
+    <div class="story-grid">
+      <a class="story-card" href="/histoires/l-autel-et-l-heritage/">
+        <div class="story-card-img" style="--story-img: url('/images/histoires/l-autel-et-l-heritage.jpg');">
+          <span class="story-card-tag">Histoire vraie</span>
+        </div>
+        <div class="story-card-body">
+          <h3>L'Autel et l'Héritage</h3>
+          <p class="story-card-excerpt">La pluie tombait comme une sentence. Cette nuit-là, un sanctuaire vodoun et une foi chrétienne allaient se retrouver enfermés dans la même pièce — et aucune des deux n'en ressortirait intacte…</p>
+          <span class="story-card-link">Lire l'histoire en entier →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="histoire-cta-band">
+      <p class="eyebrow">Si ces histoires vous parlent</p>
+      <h2 class="section-title" style="font-size:24px;">C'est cette méthode que j'enseigne</h2>
+      <span class="amt">Pack Auteur Complet — 9 900 FCFA</span>
+      <div class="snap-widget-wrap"><div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_miqemtit" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Découvrir le Pack"></div></div>
+    </div>
+  </section>
+
+  <footer>Eros Kadima<br><a href="https://wa.me/447451256734" target="_blank" rel="noopener" class="support-link">Support WhatsApp : +44 74 51 25 67 34</a></footer>
+
+</div>
+<script>
+/* ===== Widget Chariow Snap : chargement mutualisé =====
+   Charge le script + le CSS du widget UNE SEULE FOIS ; il scanne la page par
+   attribut data-product-id, donc un seul chargement suffit pour tous les
+   emplacements ".snap-slot" de la page. */
+(function() {
+  var script = document.createElement('script');
+  script.src = 'https://js.chariowcdn.com/v1/widget.min.js';
+  script.async = true;
+  document.head.appendChild(script);
+
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://js.chariowcdn.com/v1/widget.min.css';
+  document.head.appendChild(link);
+})();
+</script>
+
+<script>
+(function() {
+  var GA4_ID = "G-1RSDBCE26D";
+  var gaScript = document.createElement('script');
+  gaScript.async = true;
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+  document.head.appendChild(gaScript);
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', GA4_ID);
+  document.querySelectorAll('.buy-link').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var productId = el.getAttribute('data-product-id');
+      var label = el.getAttribute('data-custom-cta-text') || productId;
+      gtag('event', 'begin_checkout', { item_id: productId, item_name: label });
+    });
+  });
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>

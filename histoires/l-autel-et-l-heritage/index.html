@@ -1,0 +1,407 @@
+<meta charset="utf-8">
+<title>L'Autel et l'Héritage — D'après une histoire vraie — Eros Kadima</title>
+<meta name="description" content="La pluie tombait comme une sentence. Cette nuit-là, un sanctuaire vodoun et une foi chrétienne allaient se retrouver enfermés dans la même pièce — et aucune des deux n'en ressortirait intacte…">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0809'/%3E%3Cpath d='M50 20 L64 50 L50 80 L36 50 Z' fill='%23d3402f'/%3E%3C/svg%3E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="L'Autel et l'Héritage — D'après une histoire vraie">
+<meta property="og:description" content="La pluie tombait comme une sentence. Cette nuit-là, un sanctuaire vodoun et une foi chrétienne allaient se retrouver enfermés dans la même pièce — et aucune des deux n'en ressortirait intacte…">
+<meta property="og:url" content="https://livres.eroskadima.com/histoires/l-autel-et-l-heritage/">
+<meta property="og:image" content="https://livres.eroskadima.com/images/histoires/l-autel-et-l-heritage.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+
+:root {
+  --ink: #0a0809;
+  --surface: #170d0d;
+  --surface-2: #241010;
+  --line: #3a1113;
+  --deep-red: #750f16;
+  --red: #a81822;
+  --bright-red: #d3402f;
+  --cream: #e8e0d0;
+  --cream-dim: #b7a892;
+}
+* { box-sizing: border-box; }
+html { background: var(--ink); }
+body {
+  margin: 0;
+  background: radial-gradient(ellipse 120% 70% at 50% -10%, #2a0f10 0%, var(--ink) 55%), var(--ink);
+  color: var(--cream);
+  font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.frame { max-width: 780px; margin: 0 auto; padding: 0 20px; position: relative; }
+.frame::before, .frame::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--line) 8%, var(--line) 92%, transparent);
+}
+.frame::before { left: 6px; }
+.frame::after { right: 6px; }
+h1, h2, h3 { font-family: 'Cardo', Georgia, 'Times New Roman', serif; font-weight: 700; color: var(--bright-red); margin: 0; text-wrap: balance; }
+.eyebrow { font-family: 'EB Garamond', Georgia, serif; font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream-dim); text-align: center; margin: 0 0 14px; }
+.rule { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 10px 0 30px; }
+.rule::before, .rule::after { content: ""; width: 70px; height: 1px; background: var(--deep-red); }
+.diamond { width: 9px; height: 9px; background: var(--bright-red); transform: rotate(45deg); flex: none; }
+section { padding: 72px 0; position: relative; }
+section + section { border-top: 1px solid var(--line); }
+p { margin: 0 0 1em; }
+.dim { color: var(--cream-dim); }
+em { font-style: italic; color: var(--cream-dim); }
+
+.hero {
+  width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+  min-height: clamp(420px, 58vh, 560px);
+  padding: 56px 20px 56px;
+  text-align: center; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+  background-image:
+    linear-gradient(180deg, rgba(10,8,9,.55) 0%, rgba(10,8,9,.25) 35%, rgba(10,8,9,.66) 70%, var(--ink) 100%),
+    radial-gradient(ellipse 90% 65% at 50% 12%, rgba(117,15,22,.30), transparent 60%);
+  background-color: var(--surface);
+  background-size: cover; background-position: center 30%; background-repeat: no-repeat;
+}
+.hero .eyebrow { margin-bottom: 20px; text-shadow: 0 2px 16px rgba(0,0,0,.7); }
+.hero h1 { font-size: clamp(30px, 5.4vw, 46px); line-height: 1.16; margin-bottom: 22px; text-shadow: 0 4px 24px rgba(0,0,0,.75); }
+.hero .lede { font-style: italic; font-size: 19px; color: var(--cream-dim); max-width: 560px; margin: 0 auto 30px; text-shadow: 0 2px 16px rgba(0,0,0,.7); }
+
+.btn {
+  display: inline-block; font-family: 'EB Garamond', Georgia, serif; font-size: 16px; letter-spacing: 0.06em;
+  text-transform: uppercase; text-decoration: none; color: var(--cream);
+  background: linear-gradient(180deg, var(--red), var(--deep-red));
+  border: 1px solid var(--bright-red); padding: 14px 30px; border-radius: 2px;
+  box-shadow: 0 8px 24px rgba(168,24,34,0.28); transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(168,24,34,0.4); }
+.btn-ghost { background: transparent; border: 1px solid var(--deep-red); color: var(--cream-dim); }
+.btn-block { display: block; text-align: center; }
+.btn-small { padding: 10px 22px; font-size: 14px; }
+
+.faq-item { border-bottom: 1px solid var(--line); padding: 22px 0; }
+.faq-item:first-child { border-top: 1px solid var(--line); }
+.faq-q { font-family: 'Cardo', serif; font-weight: 700; color: var(--cream); font-size: 18px; margin: 0 0 10px; }
+.faq-a { color: var(--cream-dim); margin: 0; }
+
+.support-link { color: var(--bright-red); text-decoration: none; border-bottom: 1px solid var(--deep-red); }
+.support-link:hover { color: var(--cream); border-bottom-color: var(--bright-red); }
+
+footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 2.2; }
+
+.section-title { text-align: center; font-size: clamp(26px, 4vw, 34px); margin-bottom: 16px; }
+.section-lede { text-align: center; color: var(--cream-dim); max-width: 560px; margin: 0 auto 50px; }
+
+.trust-line { text-align: center; font-size: 13.5px; color: var(--cream-dim); margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.trust-line svg { flex: none; }
+
+@media (max-width: 620px) {
+  section { padding: 56px 0; }
+}
+
+
+/* ---------- NAV COMMUNE ---------- */
+.sitenav {
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(10,8,9,.93);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.navframe {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.navbrand {
+  font-family: 'Cardo', Georgia, serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--cream);
+  text-decoration: none;
+  letter-spacing: .02em;
+  flex: none;
+}
+.navlinks { display: flex; gap: 22px; flex-wrap: wrap; }
+.navlinks a {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 15px;
+  color: var(--cream-dim);
+  text-decoration: none;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color .2s ease, border-color .2s ease;
+  white-space: nowrap;
+}
+.navlinks a:hover { color: var(--cream); }
+.navlinks a.active { color: var(--bright-red); border-bottom-color: var(--bright-red); }
+@media (max-width: 560px) {
+  .navframe { padding: 12px 16px; gap: 10px; }
+  .navbrand { font-size: 14px; }
+  .navlinks { gap: 14px; }
+  .navlinks a { font-size: 13px; }
+}
+
+
+/* ---------- WIDGET CHARIOW SNAP (achat direct, sans redirection) ---------- */
+.snap-widget-wrap { display: flex; justify-content: center; width: 100%; }
+.snap-widget-wrap .snap-slot { width: 100%; }
+.snap-slot { display: inline-flex; align-items: center; min-height: 48px; }
+
+
+/* ---------- INDEX DES HISTOIRES (vignette + amorce) ---------- */
+.story-intro { max-width: 620px; margin: 0 auto; text-align: center; }
+.story-disclaimer {
+  max-width: 560px; margin: 22px auto 0; padding: 14px 18px;
+  border: 1px solid var(--line); background: var(--surface);
+  font-size: 13.5px; color: var(--cream-dim); line-height: 1.6; text-align: left;
+}
+.story-disclaimer b { color: var(--cream); }
+
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+@media (max-width: 680px) { .story-grid { grid-template-columns: 1fr; } }
+.story-card {
+  display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--line);
+  text-decoration: none; color: inherit; overflow: hidden;
+  transition: border-color .2s ease, transform .2s ease;
+}
+.story-card:hover { border-color: var(--deep-red); transform: translateY(-2px); }
+.story-card-img {
+  aspect-ratio: 16 / 10; width: 100%;
+  background-image:
+    linear-gradient(160deg, rgba(117,15,22,.35), rgba(10,8,9,.55)),
+    var(--story-img, none);
+  background-size: cover; background-position: center;
+  background-color: var(--surface-2);
+  display: flex; align-items: flex-end; padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.story-card-tag {
+  display: inline-block; padding: 4px 12px; border-radius: 999px;
+  border: 1px solid var(--bright-red); background: rgba(10,8,9,.55);
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--bright-red);
+}
+.story-card-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex-grow: 1; }
+.story-card h3 { font-size: 21px; line-height: 1.28; margin-bottom: 10px; }
+.story-card-excerpt { color: var(--cream-dim); font-size: 15.5px; margin-bottom: 18px; flex-grow: 1; }
+.story-card-link {
+  font-family: 'EB Garamond', Georgia, serif; font-size: 14.5px; letter-spacing: .04em;
+  color: var(--bright-red); text-transform: uppercase;
+}
+.story-card:hover .story-card-link { color: var(--cream); }
+
+.histoire-cta-band {
+  max-width: 560px; margin: 0 auto; text-align: center;
+  padding: 30px 26px; background: linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--deep-red);
+}
+.histoire-cta-band .amt { font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red); font-size: 24px; display: block; margin: 8px 0 20px; }
+
+/* ---------- PAGE HISTOIRE INDIVIDUELLE ---------- */
+.story-back {
+  display: inline-block; font-size: 14px; color: var(--cream-dim); text-decoration: none;
+  border-bottom: 1px solid var(--line); margin-bottom: 26px;
+}
+.story-back:hover { color: var(--bright-red); border-color: var(--deep-red); }
+.story-meta {
+  text-align: center; font-size: 13px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--cream-dim); margin-bottom: 10px;
+}
+.story-title { text-align: center; max-width: 680px; margin: 0 auto 20px; }
+.story-header-img {
+  aspect-ratio: 16 / 8; width: 100%; margin: 0 auto 38px; max-width: 680px;
+  background-image:
+    linear-gradient(160deg, rgba(117,15,22,.35), rgba(10,8,9,.4)),
+    var(--story-img, none);
+  background-size: cover; background-position: center; background-color: var(--surface-2);
+  border: 1px solid var(--line);
+}
+.story-body { max-width: 640px; margin: 0 auto; font-size: 18px; line-height: 1.85; color: var(--cream); }
+.story-body p { margin: 0 0 1.3em; }
+.story-body p:first-of-type::first-letter {
+  font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red);
+  font-size: 3.6em; float: left; line-height: .82; margin: .06em .1em 0 0;
+}
+.story-body em { font-style: italic; color: var(--cream-dim); }
+.story-example-tag {
+  display: inline-block; margin-bottom: 24px; padding: 5px 14px;
+  border: 1px solid var(--deep-red); border-radius: 999px;
+  font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--bright-red);
+}
+.story-end-note {
+  max-width: 560px; margin: 44px auto 0; padding: 14px 18px;
+  border: 1px solid var(--line); background: var(--surface);
+  font-size: 13.5px; color: var(--cream-dim); line-height: 1.6; text-align: center;
+}
+.story-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
+.story-mature-tag {
+  display: inline-block; padding: 5px 14px;
+  border: 1px solid var(--line); border-radius: 999px;
+  font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--cream-dim);
+}
+.story-divider { display: flex; align-items: center; justify-content: center; margin: 34px 0; }
+.story-divider .diamond { width: 8px; height: 8px; background: var(--deep-red); transform: rotate(45deg); }
+
+/* ---------- CTA STICKY (accompagne la lecture) ---------- */
+.sticky-cta {
+  position: fixed; left: 50%; bottom: -100px; transform: translateX(-50%);
+  z-index: 70; display: flex; align-items: center; gap: 16px;
+  background: linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--deep-red); box-shadow: 0 12px 34px rgba(0,0,0,.5);
+  padding: 12px 18px; opacity: 0; pointer-events: none;
+  transition: opacity .3s ease, bottom .3s ease;
+  width: calc(100% - 32px); max-width: 420px;
+}
+.sticky-cta.is-visible { opacity: 1; pointer-events: auto; bottom: 18px; }
+.sticky-cta .info { line-height: 1.25; flex: none; }
+.sticky-cta .info .lbl { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-dim); }
+.sticky-cta .info .amt { font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red); font-size: 17px; }
+.sticky-cta .snap-slot { min-height: 40px; }
+@media (prefers-reduced-motion: reduce) { .sticky-cta { transition: none; } }
+
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,700&family=EB+Garamond:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,700&family=EB+Garamond:ital@0;1&display=swap"></noscript>
+
+<nav class="sitenav">
+  <div class="navframe">
+    <a href="/" class="navbrand">Eros Kadima</a>
+    <div class="navlinks">
+      <a href="/">Outils de l'Auteur</a>
+      <a href="/services/">Services</a>
+      <a href="/chansons/">Chansons</a>
+      <a href="/histoires/" class="active">Histoires</a>
+    </div>
+  </div>
+</nav>
+
+<div class="frame">
+
+  <section id="story-start" style="padding-top:48px;">
+    <a class="story-back" href="/histoires/">← Toutes les histoires</a>
+    <div class="story-tags"><span class="story-mature-tag">Contenu explicite — lectorat adulte</span></div>
+    <p class="story-meta">D'après une histoire vraie</p>
+    <h1 class="story-title">L'Autel et l'Héritage</h1>
+    <div class="story-header-img" style="--story-img: url('/images/histoires/l-autel-et-l-heritage.jpg');"></div>
+    <div class="story-body">
+        <p>La pluie tombait comme une sentence.</p>
+        <p>Sevyn n'avait pas eu besoin d'ouvrir la porte pour savoir qui frappait ainsi, à corps perdu, contre le bois gonflé d'humidité. Elle la reconnut au tremblement de la poignée, à cette façon hésitante de cogner qui trahissait une femme qui n'avait jamais demandé refuge à personne.</p>
+        <p>Grâce se tenait sur le seuil, trempée jusqu'à l'âme, la croix d'argent collée à sa gorge par la pluie. Derrière elle, l'orage déchirait le ciel au-dessus du village comme pour punir quelqu'un — elle ne savait plus qui.</p>
+        <p>Sevyn s'écarta sans un mot, et Grâce entra dans un monde qui n'était pas le sien.</p>
+        <p>L'air du sanctuaire en pisé sentait le cyprès brûlé, l'alcool de palme et la terre mouillée — une odeur si dense qu'elle semblait avoir un poids. Sur les étagères basses, les assons cliquetaient doucement dans le courant d'air de la porte refermée ; des gobelets de cuivre noirci et de petites statuettes aux visages polis par des générations de mains veillaient depuis l'ombre, indifférentes à la foi qui venait de franchir leur seuil. Rien ici ne ressemblait à une église. Rien ici n'obéissait au Dieu de Grâce.</p>
+        <p>Elle resta debout, ruisselante, n'osant regarder ni les murs ni la femme qui l'observait.</p>
+        <div class="story-divider"><span class="diamond"></span></div>
+        <p>— Tu vas prendre froid, dit enfin Sevyn, sans que ce fût une question.</p>
+        <p>Sa voix avait ce calme épais des choses anciennes, un calme que rien ne semblait pouvoir presser.</p>
+        <p>— Ces vêtements ne sécheront pas sur toi. Enlève-les.</p>
+        <p>Grâce sentit le sang lui monter au visage. — Je... je peux attendre que l'orage passe.</p>
+        <p>— L'orage ne passera pas cette nuit.</p>
+        <p>Sevyn s'approcha, et Grâce ne recula pas — elle ne sut jamais dire pourquoi. Des doigts sombres, précis, défirent le premier bouton de son corsage trempé, puis le second, avec la lenteur de quelqu'un qui accomplit un geste rituel plutôt qu'un geste ordinaire. Grâce tremblait, mais ce n'était plus tout à fait de froid.</p>
+        <p>— C'est une huile d'arachide, dit Sevyn en versant un peu de liquide tiède dans sa paume. Elle réchauffe la peau. Rien de plus.</p>
+        <p>Rien de plus — et pourtant, quand les mains de Sevyn se posèrent sur ses épaules nues, Grâce dut fermer les yeux pour ne pas trahir ce que ce simple contact venait de déplacer en elle. Le tissu lourd glissa au sol dans un bruit mouillé. L'huile traça un chemin tiède le long de sa clavicule, et Grâce, pour la première fois depuis des années, cessa de prier.</p>
+        <p>Elle regardait la bouche de Sevyn.</p>
+        <div class="story-divider"><span class="diamond"></span></div>
+        <p>Elle essaya de se reprendre. Elle chercha en elle les mots qu'on lui avait appris à opposer à toute tentation, et un psaume monta à ses lèvres, fragile, hésitant : « L'Éternel est mon berger, je ne manquerai de... »</p>
+        <p>— Chut, fit Sevyn.</p>
+        <p>Une main chaude se posa sur sa gorge — non pour l'étouffer, mais pour sentir, sous la peau, les mots qui s'y débattaient. Grâce sentit le psaume se briser contre cette paume comme une vague contre un rocher trop patient pour céder.</p>
+        <p>— Tu pries pour ne pas sentir, murmura Sevyn, tout près de son oreille. Sens, pour une fois.</p>
+        <p>Grâce ferma les yeux. Et ce qui sortit d'elle, à la place du verset suivant, ne fut pas une prière.</p>
+        <p>Ce fut un gémissement.</p>
+        <p>Elle sentit, dans l'instant même où ce son lui échappa, un basculement aussi silencieux qu'irréversible — comme un pilier qui se déplace sans bruit avant de faire tomber tout un mur. Elle avait cru entrer dans ce sanctuaire pour s'y protéger. Elle comprenait, à présent, qu'elle venait de s'y perdre.</p>
+        <div class="story-divider"><span class="diamond"></span></div>
+        <p>Sevyn l'allongea devant l'autel, sur une natte tissée qui gardait encore l'odeur des offrandes de la veille. Au-dessus d'elles, dans la pénombre, les statuettes semblaient regarder sans juger — comme si aucun des deux mondes présents dans cette pièce n'avait vraiment le droit de condamner l'autre.</p>
+        <p>Dehors, l'orage roulait des tambours de pluie sur la tôle, un rythme sourd et régulier que les deux corps, sans se concerter, finirent par épouser.</p>
+        <p>Sevyn embrassa d'abord la naissance de son cou, puis descendit avec une lenteur presque cruelle, semant sur son passage des caresses qui n'étaient ni douces ni brutales — simplement inévitables. Chaque geste portait en lui quelque chose du rituel : rien n'était fait au hasard, tout semblait obéir à un ordre plus ancien que la pudeur.</p>
+        <p>La croix d'argent de Grâce glissait entre elles à chaque mouvement, froide contre la chaleur montante de sa peau, tandis que les mains de Sevyn, gorgées d'huile, dessinaient sur elle une géographie qu'aucune prière ne lui avait jamais enseignée. Grâce se cambra, cherchant sans le savoir un dieu qu'elle ne trouvait plus dans les cieux mais dans le poids d'un corps contre le sien.</p>
+        <p>Elle avait passé sa vie à se retenir. Là, dans la chaleur de l'autel et l'odeur d'encens, elle cessa.</p>
+        <p>Le plaisir monta en elle comme une marée qu'aucune digue n'avait jamais été construite pour contenir, et lorsqu'il se brisa enfin, ce ne fut ni un cri de joie ni un cri de peur, mais les deux confondus — un son qu'aucune des deux femmes n'aurait su nommer, et qui pourtant les lia, dans cet instant, plus sûrement qu'aucun serment.</p>
+        <div class="story-divider"><span class="diamond"></span></div>
+        <p>Le silence, après, fut plus lourd que l'orage.</p>
+        <p>Grâce resta immobile, le souffle court, sentant déjà remonter en elle, comme une eau froide après la chaleur, la certitude d'avoir péché. Elle porta la main à sa poitrine et n'y trouva que sa peau nue — la croix avait glissé sur le côté, comme rejetée.</p>
+        <p>Les larmes vinrent sans prévenir. Elle pleurait sans bien savoir pourquoi : de honte, sans doute, mais aussi de quelque chose de plus difficile à nommer — l'intensité même de ce qu'elle venait de vivre, et la certitude, déjà, qu'elle ne pourrait plus jamais faire comme si cela n'avait pas eu lieu.</p>
+        <p>— Je ne peux pas... commença-t-elle.</p>
+        <p>Sevyn ne répondit rien. Elle se contenta de rester là, une main posée à plat sur le dos de Grâce, ni pour la consoler ni pour s'excuser — simplement pour lui rappeler qu'elle n'était pas seule dans ce vertige.</p>
+        <p>Grâce comprit alors ce que sa propre foi ne lui avait jamais appris : que certaines ruptures, une fois consommées, ne peuvent être défaites. Le sacrilège avait eu lieu. Il ne restait plus qu'à savoir ce qu'on en ferait.</p>
+        <div class="story-divider"><span class="diamond"></span></div>
+        <p>L'aube se leva sans bruit sur un ciel lavé de sa colère.</p>
+        <p>Grâce trouva sa croix sur la natte, près de son visage, et la regarda longtemps sans la reprendre. Sevyn s'approcha, un gobelet de cuivre à la main, empli d'une eau qu'elle avait bénie à sa manière, devant son propre autel.</p>
+        <p>— Bois, dit-elle simplement.</p>
+        <p>Grâce hésita, puis porta le gobelet à ses lèvres. L'eau avait un goût de terre et de feuilles, rien à voir avec celle de son église — et pourtant, en la buvant, elle sentit quelque chose se sceller en elle, aussi certainement qu'un serment.</p>
+        <p>Elle ne reprit pas sa croix. Elle la laissa sur la natte, comme on laisse une chose qu'on n'a plus besoin de porter contre soi pour croire.</p>
+        <p>Dehors, le village s'éveillait sans savoir qu'une nuit avait suffi à fonder, entre ces deux femmes, une foi nouvelle — secrète, charnelle, et plus vraie qu'aucune des deux religions qui l'avaient rendue impossible.</p>
+    </div>
+    <div class="story-end-note">
+      <b>Note :</b> les noms, lieux et détails identifiants sont modifiés ou romancés. Rien n'est publié ici sans l'accord explicite des personnes concernées.
+    </div>
+  </section>
+
+  <footer>Eros Kadima<br><a href="https://wa.me/447451256734" target="_blank" rel="noopener" class="support-link">Support WhatsApp : +44 74 51 25 67 34</a></footer>
+
+</div>
+
+<div class="sticky-cta" id="stickyCta">
+  <div class="info"><span class="lbl">Pack Auteur Complet</span><br><span class="amt">9 900 FCFA</span></div>
+  <div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_miqemtit" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Obtenir"></div>
+</div>
+
+<script>
+/* CTA sticky : apparaît une fois l'intro dépassée, reste visible tout le long
+   de l'histoire (pas de "final" à éviter ici, contrairement au tunnel). */
+(function() {
+  var stickyCta = document.getElementById("stickyCta");
+  var marker = document.getElementById("story-start");
+  if (!stickyCta || !marker) return;
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function(entries) {
+      stickyCta.classList.toggle("is-visible", !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(marker);
+  } else {
+    stickyCta.classList.add("is-visible");
+  }
+})();
+</script>
+<script>
+/* ===== Widget Chariow Snap : chargement mutualisé =====
+   Charge le script + le CSS du widget UNE SEULE FOIS ; il scanne la page par
+   attribut data-product-id, donc un seul chargement suffit pour tous les
+   emplacements ".snap-slot" de la page. */
+(function() {
+  var script = document.createElement('script');
+  script.src = 'https://js.chariowcdn.com/v1/widget.min.js';
+  script.async = true;
+  document.head.appendChild(script);
+
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://js.chariowcdn.com/v1/widget.min.css';
+  document.head.appendChild(link);
+})();
+</script>
+
+<script>
+(function() {
+  var GA4_ID = "G-1RSDBCE26D";
+  var gaScript = document.createElement('script');
+  gaScript.async = true;
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+  document.head.appendChild(gaScript);
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', GA4_ID);
+  document.querySelectorAll('.buy-link').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var productId = el.getAttribute('data-product-id');
+      var label = el.getAttribute('data-custom-cta-text') || productId;
+      gtag('event', 'begin_checkout', { item_id: productId, item_name: label });
+    });
+  });
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
