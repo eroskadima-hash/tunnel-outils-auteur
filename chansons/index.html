@@ -147,6 +147,12 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 }
 
 
+/* ---------- WIDGET CHARIOW SNAP (achat direct, sans redirection) ---------- */
+.snap-widget-wrap { display: flex; justify-content: center; width: 100%; }
+.snap-widget-wrap .snap-slot { width: 100%; }
+.snap-slot { display: inline-flex; align-items: center; min-height: 48px; }
+
+
 .hero-chansons {
   background-image:
     linear-gradient(180deg, rgba(10,8,9,.55) 0%, rgba(10,8,9,.25) 35%, rgba(10,8,9,.66) 70%, var(--ink) 100%),
@@ -221,7 +227,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
           <li>Livraison en 48h</li>
           <li>Fichier MP3</li>
         </ul>
-        <a href="https://boutique.eroskadima.com/prd_0thoj630" target="_blank" rel="noopener" class="btn btn-block buy-link" data-product-id="prd_0thoj630" data-custom-cta-text="hire_service">Commander</a>
+        <div class="snap-widget-wrap"><div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_0thoj630" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Commander"></div></div>
       </div>
       <div class="tier-card featured">
         <div class="tier-badge">Le plus choisi</div>
@@ -233,7 +239,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
           <li>Votre voix en introduction (en option)</li>
           <li>Livraison en 24h · MP3 + WAV studio</li>
         </ul>
-        <a href="https://boutique.eroskadima.com/prd_94vzntga" target="_blank" rel="noopener" class="btn btn-block buy-link" data-product-id="prd_94vzntga" data-custom-cta-text="hire_service">Commander</a>
+        <div class="snap-widget-wrap"><div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_94vzntga" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Commander"></div></div>
       </div>
       <div class="tier-card">
         <div class="tier-name">Prestige</div>
@@ -244,7 +250,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
           <li>Révisions illimitées</li>
           <li>Livraison en 48h</li>
         </ul>
-        <a href="https://boutique.eroskadima.com/prd_tqeaxlqu" target="_blank" rel="noopener" class="btn btn-block buy-link" data-product-id="prd_tqeaxlqu" data-custom-cta-text="hire_service">Commander</a>
+        <div class="snap-widget-wrap"><div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_tqeaxlqu" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Commander"></div></div>
       </div>
     </div>
     <p class="trust-line"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5.2 3.4 9.7 8 11 4.6-1.3 8-5.8 8-11V5l-8-3Z"/></svg> Paiement sécurisé via Chariow · Questionnaire WhatsApp après commande</p>
@@ -263,7 +269,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
         <li>Révision incluse</li>
         <li>Livraison en 10 à 14 jours — à prévoir en avance</li>
       </ul>
-      <a href="https://boutique.eroskadima.com/prd_rj6b7cm6" target="_blank" rel="noopener" class="btn btn-block buy-link" data-product-id="prd_rj6b7cm6" data-custom-cta-text="hire_service">Commander le Pack Mariage</a>
+      <div class="snap-widget-wrap"><div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_rj6b7cm6" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Commander le Pack Mariage"></div></div>
     </div>
   </section>
 
@@ -320,6 +326,23 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
   <footer>Eros Kadima<br><a href="https://wa.me/447451256734" target="_blank" rel="noopener" class="support-link">Support WhatsApp : +44 74 51 25 67 34</a></footer>
 
 </div>
+<script>
+/* ===== Widget Chariow Snap : chargement mutualisé =====
+   Charge le script + le CSS du widget UNE SEULE FOIS ; il scanne la page par
+   attribut data-product-id, donc un seul chargement suffit pour tous les
+   emplacements ".snap-slot" de la page. */
+(function() {
+  var script = document.createElement('script');
+  script.src = 'https://js.chariowcdn.com/v1/widget.min.js';
+  script.async = true;
+  document.head.appendChild(script);
+
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://js.chariowcdn.com/v1/widget.min.css';
+  document.head.appendChild(link);
+})();
+</script>
 
 <script>
 (function() {
