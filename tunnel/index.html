@@ -164,7 +164,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 .tier-card { background: var(--surface); border: 1px solid var(--line); padding: 26px 22px; display: flex; flex-direction: column; text-align: center; position: relative; }
 .tier-card.featured { border-color: var(--bright-red); box-shadow: 0 0 0 1px var(--bright-red), 0 16px 34px rgba(0,0,0,.4); }
 .tier-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--bright-red); color: var(--ink); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; white-space: nowrap; }
-.tier-img { width: 84px; height: 84px; object-fit: cover; border-radius: 50%; border: 1px solid var(--deep-red); margin: 4px auto 14px; display: block; }
+.tier-img { width: 84px; height: 84px; object-fit: contain; margin: 4px auto 14px; display: block; }
 .tier-name { font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red); font-size: 19px; margin-bottom: 4px; }
 .tier-price { font-family: 'Cardo', serif; font-weight: 700; font-size: 26px; color: var(--cream); margin-bottom: 16px; }
 .tier-bullets { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; text-align: left; }
@@ -177,7 +177,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     linear-gradient(180deg, rgba(10,8,9,.60) 0%, rgba(10,8,9,.30) 35%, rgba(10,8,9,.70) 70%, var(--ink) 100%),
     radial-gradient(ellipse 90% 65% at 50% 12%, rgba(117,15,22,.30), transparent 60%),
     url('/images/hero-tunnel.jpg');
-  background-size: cover; background-position: center 40%; background-repeat: no-repeat;
+  background-size: cover; background-position: center 12%; background-repeat: no-repeat;
   background-color: var(--surface);
 }
 .tunnel-steps { display: flex; flex-direction: column; gap: 28px; max-width: 600px; margin: 0 auto; }
@@ -235,7 +235,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     <div class="tier-grid">
       <div class="tier-card">
         
-        <img class="tier-img" src="/images/tunnel/vignette-le-guide-sm.jpg" alt="Le Guide" loading="lazy">
+        <img class="tier-img" src="/images/tunnel/tier-icon-le-guide.png" alt="Le Guide" loading="lazy">
         <div class="tier-name">Le Guide</div>
         <div class="tier-price">15 000 FCFA</div>
         <ul class="tier-bullets"><li>Le guide complet, étape par étape (GitHub, Vercel, domaine, boutique et paiement)</li><li>Les prompts IA prêts à l'emploi, backend et frontend</li><li>Tu construis toi-même, à ton rythme</li><li>Accès à vie, aucun abonnement</li></ul>
@@ -243,7 +243,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
       </div>
       <div class="tier-card featured">
         <div class="tier-badge">Le plus équilibré</div>
-        <img class="tier-img" src="/images/tunnel/vignette-accompagnement-sm.jpg" alt="Accompagnement Guidé" loading="lazy">
+        <img class="tier-img" src="/images/tunnel/tier-icon-accompagnement.png" alt="Accompagnement Guidé" loading="lazy">
         <div class="tier-name">Accompagnement Guidé</div>
         <div class="tier-price">60 000 FCFA</div>
         <ul class="tier-bullets"><li>1 à 2 sessions en visio, avec moi à tes côtés</li><li>Le guide complet + le formulaire de cadrage inclus</li><li>Tu gardes la main sur ton tunnel</li><li>Questions illimitées par WhatsApp pendant l'accompagnement</li></ul>
@@ -251,7 +251,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
       </div>
       <div class="tier-card">
         
-        <img class="tier-img" src="/images/tunnel/vignette-cle-en-main-sm.jpg" alt="Tunnel Clé en Main" loading="lazy">
+        <img class="tier-img" src="/images/tunnel/tier-icon-cle-en-main.png" alt="Tunnel Clé en Main" loading="lazy">
         <div class="tier-name">Tunnel Clé en Main</div>
         <div class="tier-price">150 000 FCFA</div>
         <ul class="tier-bullets"><li>Ton tunnel construit de A à Z, par nous</li><li>Site, boutique, paiement et domaine configurés</li><li>Formulaire de cadrage pour démarrer du bon pied</li><li>Formation rapide + support après la mise en ligne</li></ul>
