@@ -172,6 +172,15 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 .tier-bullets li::before { content: ""; flex: none; width: 6px; height: 6px; background: var(--bright-red); transform: rotate(45deg); margin-top: 4px; }
 
 
+.bonus-box {
+  display: grid; grid-template-columns: 220px 1fr; gap: 26px; align-items: center;
+  background: var(--surface); border: 1px dashed var(--deep-red); padding: 24px;
+}
+.bonus-banner { width: 100%; display: block; border: 1px solid var(--line); }
+.bonus-box .eyebrow { text-align: left; margin-bottom: 8px; }
+.bonus-box h2 { font-size: clamp(21px, 3vw, 25px); margin-bottom: 10px; text-align: left; }
+.bonus-box p.bonus-copy { color: var(--cream-dim); margin-bottom: 18px; font-size: 15.5px; }
+@media (max-width: 680px) { .bonus-box { grid-template-columns: 1fr; text-align: center; } .bonus-box .eyebrow, .bonus-box h2 { text-align: center; } }
 .hero-tunnel {
   background-image:
     linear-gradient(180deg, rgba(10,8,9,.60) 0%, rgba(10,8,9,.30) 35%, rgba(10,8,9,.70) 70%, var(--ink) 100%),
@@ -215,6 +224,18 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
     <h1>Le même tunnel.<br>Dans ton secteur.</h1>
     <p class="lede">Ce site que tu es en train de lire — pages, boutique, paiement intégré — a été construit avec une méthode précise, reproductible pour n'importe quelle activité. Je t'aide à construire le tien.</p>
     <a href="#offres" class="btn">Voir les formules</a>
+  </section>
+
+  <section>
+    <div class="bonus-box">
+      <img class="bonus-banner" src="/images/tunnel/banner-bonus.jpg" alt="5 Outils Gratuits pour Ton Tunnel de Vente" loading="lazy">
+      <div>
+        <p class="eyebrow">Avant de payer quoi que ce soit</p>
+        <h2>Reçois gratuitement la checklist</h2>
+        <p class="bonus-copy">Les 4 outils exacts (GitHub, Vercel, Porkbun, Chariow), une checklist étape par étape, et un premier prompt IA prêt à copier pour ta page d'accueil — un extrait offert du guide complet.</p>
+        <div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_qz0s5m1m" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Recevoir gratuitement"></div>
+      </div>
+    </div>
   </section>
 
   <section>
