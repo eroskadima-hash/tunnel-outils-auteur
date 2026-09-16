@@ -104,46 +104,99 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 .sitenav {
   position: sticky; top: 0; z-index: 60;
   background: rgba(10,8,9,.93);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
+.sitenav::before {
+  content: ""; display: block; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--bright-red) 50%, transparent);
+  opacity: .55;
+}
 .navframe {
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 15px 20px;
+  padding: 15px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  position: relative;
 }
 .navbrand {
+  display: inline-flex; align-items: center; gap: 10px;
   font-family: 'Cardo', Georgia, serif;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 18px;
   color: var(--cream);
   text-decoration: none;
   letter-spacing: .02em;
   flex: none;
+  transition: color .2s ease;
 }
-.navlinks { display: flex; gap: 22px; flex-wrap: wrap; }
+.navbrand:hover { color: var(--bright-red); }
+.navbrand-mark {
+  width: 7px; height: 7px; flex: none;
+  background: var(--bright-red);
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px rgba(211,64,47,.7);
+}
+.navlinks { display: flex; align-items: center; gap: 2px; }
 .navlinks a {
   font-family: 'EB Garamond', Georgia, serif;
-  font-size: 15px;
+  font-size: 13px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
   color: var(--cream-dim);
   text-decoration: none;
-  padding: 4px 0;
-  border-bottom: 2px solid transparent;
-  transition: color .2s ease, border-color .2s ease;
+  padding: 9px 14px;
+  border-radius: 3px;
+  position: relative;
   white-space: nowrap;
+  transition: color .2s ease, background-color .2s ease;
+}
+.navlinks a::after {
+  content: ""; position: absolute; left: 14px; right: 14px; bottom: 5px; height: 1px;
+  background: var(--bright-red);
+  transform: scaleX(0); transform-origin: center;
+  transition: transform .25s ease;
 }
 .navlinks a:hover { color: var(--cream); }
-.navlinks a.active { color: var(--bright-red); border-bottom-color: var(--bright-red); }
-@media (max-width: 560px) {
-  .navframe { padding: 12px 16px; gap: 10px; }
-  .navbrand { font-size: 14px; }
-  .navlinks { gap: 14px; }
-  .navlinks a { font-size: 13px; }
+.navlinks a:hover::after { transform: scaleX(1); }
+.navlinks a.active { color: var(--bright-red); background: rgba(211,64,47,.12); }
+.navlinks a.active::after { transform: scaleX(1); }
+
+.navtoggle-input { display: none; }
+.navburger {
+  display: none; flex-direction: column; justify-content: center; align-items: flex-end; gap: 5px;
+  width: 34px; height: 34px; cursor: pointer; flex: none;
+}
+.navburger span { display: block; width: 100%; height: 2px; background: var(--cream); border-radius: 2px; transition: transform .25s ease, opacity .2s ease, width .25s ease; }
+.navburger span:nth-child(2) { width: 70%; }
+.navburger:hover span { background: var(--bright-red); }
+
+@media (max-width: 768px) {
+  .navframe { padding: 13px 18px; }
+  .navbrand { font-size: 15px; }
+  .navburger { display: flex; }
+  .navlinks {
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: rgba(10,8,9,.98);
+    border-bottom: 1px solid var(--line);
+    max-height: 0; overflow: hidden;
+    transition: max-height .32s ease;
+  }
+  .navlinks a {
+    padding: 16px 24px; border-radius: 0; font-size: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .navlinks a::after { display: none; }
+  .navlinks a.active { border-left: 3px solid var(--bright-red); padding-left: 21px; background: rgba(211,64,47,.08); }
+  .navtoggle-input:checked ~ .navlinks { max-height: 420px; }
+  .navtoggle-input:checked ~ .navburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); width: 100%; }
+  .navtoggle-input:checked ~ .navburger span:nth-child(2) { opacity: 0; }
+  .navtoggle-input:checked ~ .navburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 100%; }
 }
 
 
@@ -287,7 +340,11 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 
 <nav class="sitenav">
   <div class="navframe">
-    <a href="/" class="navbrand">Eros Kadima</a>
+    <a href="/" class="navbrand"><span class="navbrand-mark"></span>Eros Kadima</a>
+    <input type="checkbox" id="navtoggle" class="navtoggle-input">
+    <label for="navtoggle" class="navburger" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </label>
     <div class="navlinks">
       <a href="/">Outils de l'Auteur</a>
       <a href="/services/">Services</a>
