@@ -184,22 +184,14 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 .how-step p { margin: 0; color: var(--cream-dim); }
 
 
-.tunnel-proof { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 680px; margin: 0 auto 40px; }
-.tunnel-proof figure { margin: 0; }
-.tunnel-proof img { width: 100%; display: block; border: 1px solid var(--line); }
-.tunnel-proof figcaption { font-size: 12.5px; color: var(--cream-dim); text-align: center; margin-top: 6px; font-style: italic; }
-@media (max-width: 680px) { .tunnel-proof { grid-template-columns: 1fr; max-width: 320px; } }
-
-.tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-bottom: 26px; }
-@media (max-width: 780px) { .tier-grid { grid-template-columns: 1fr; } }
-.tier-card { background: var(--surface); border: 1px solid var(--line); padding: 26px 22px; display: flex; flex-direction: column; text-align: center; position: relative; }
-.tier-card.featured { border-color: var(--bright-red); box-shadow: 0 0 0 1px var(--bright-red), 0 16px 34px rgba(0,0,0,.4); }
-.tier-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--bright-red); color: var(--ink); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; white-space: nowrap; }
-.tier-name { font-family: 'Cardo', serif; font-weight: 700; color: var(--bright-red); font-size: 19px; margin-bottom: 4px; }
-.tier-price { font-family: 'Cardo', serif; font-weight: 700; font-size: 26px; color: var(--cream); margin-bottom: 16px; }
-.tier-bullets { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; text-align: left; }
-.tier-bullets li { display: flex; gap: 9px; align-items: baseline; font-size: 14.5px; color: var(--cream-dim); }
-.tier-bullets li::before { content: ""; flex: none; width: 6px; height: 6px; background: var(--bright-red); transform: rotate(45deg); margin-top: 4px; }
+.tunnel-teaser {
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--deep-red);
+  padding: 40px 32px;
+  text-align: center;
+}
+.tunnel-teaser h2 { font-size: clamp(22px, 3.4vw, 28px); margin-bottom: 12px; }
+.tunnel-teaser p { color: var(--cream-dim); max-width: 520px; margin: 0 auto 22px; }
 
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -215,6 +207,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
       <a href="/services/" class="active">Services</a>
       <a href="/chansons/">Chansons</a>
       <a href="/histoires/">Histoires</a>
+      <a href="/tunnel/">Créer ton Tunnel</a>
     </div>
   </div>
 </nav>
@@ -286,38 +279,12 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
   </section>
 
   <section id="tunnel">
-    <p class="eyebrow">Et si c'était ton tour ?</p>
-    <h2 class="section-title">Le même système, pour ton activité</h2>
-    <p class="section-lede">Ce site — celui que tu es en train de lire — a été construit avec cette méthode : GitHub, Vercel, un nom de domaine, et un vrai système de paiement intégré. Je t'aide à construire le tien, quel que soit ton secteur.</p>
-    <div class="tunnel-proof">
-      <figure><img src="/images/tunnel/tunnel-histoires.jpg" alt="Page « Histoires »" loading="lazy"><figcaption>Page « Histoires »</figcaption></figure>
-      <figure><img src="/images/tunnel/tunnel-chansons.jpg" alt="Page « Chansons »" loading="lazy"><figcaption>Page « Chansons »</figcaption></figure>
-      <figure><img src="/images/tunnel/tunnel-services.jpg" alt="Cette page « Services »" loading="lazy"><figcaption>Cette page « Services »</figcaption></figure>
+    <div class="tunnel-teaser">
+      <p class="eyebrow">Et si c'était ton tour ?</p>
+      <h2>Ce site a été construit avec une méthode que tu peux reproduire</h2>
+      <p>GitHub, Vercel, un nom de domaine, un vrai système de paiement intégré — quel que soit ton secteur. Je t'aide à construire le tien.</p>
+      <a href="/tunnel/" class="btn">Créer ton Tunnel de Vente</a>
     </div>
-    <div class="tier-grid">
-      <div class="tier-card">
-        
-        <div class="tier-name">Le Guide</div>
-        <div class="tier-price">15 000 FCFA</div>
-        <ul class="tier-bullets"><li>Le guide complet, étape par étape (GitHub, Vercel, domaine, boutique et paiement)</li><li>Les prompts IA prêts à l'emploi, backend et frontend</li><li>Tu construis toi-même, à ton rythme</li><li>Accès à vie, aucun abonnement</li></ul>
-        <div class="snap-widget-wrap"><div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_aoo1zrsh" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Télécharger le guide"></div></div>
-      </div>
-      <div class="tier-card featured">
-        <div class="tier-badge">Le plus équilibré</div>
-        <div class="tier-name">Accompagnement Guidé</div>
-        <div class="tier-price">60 000 FCFA</div>
-        <ul class="tier-bullets"><li>1 à 2 sessions en visio, avec moi à tes côtés</li><li>Le guide complet inclus comme support</li><li>Tu gardes la main sur ton tunnel</li><li>Questions illimitées par WhatsApp pendant l'accompagnement</li></ul>
-        <div class="snap-widget-wrap"><div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_rbo8t9j8" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Réserver ma session"></div></div>
-      </div>
-      <div class="tier-card">
-        
-        <div class="tier-name">Tunnel Clé en Main</div>
-        <div class="tier-price">150 000 FCFA</div>
-        <ul class="tier-bullets"><li>Ton tunnel construit de A à Z, par nous</li><li>Site, boutique, paiement et domaine configurés</li><li>Structure de vente pensée pour convertir</li><li>Formation rapide + support après la mise en ligne</li></ul>
-        <div class="snap-widget-wrap"><div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_e1h5xnft" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#d3402f" data-background-color="#241010" data-custom-cta-text="Démarrer mon tunnel"></div></div>
-      </div>
-    </div>
-    <p class="trust-line"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5.2 3.4 9.7 8 11 4.6-1.3 8-5.8 8-11V5l-8-3Z"/></svg> Paiement sécurisé via Chariow · Suivi direct par WhatsApp après commande</p>
   </section>
 
   <section>
@@ -354,10 +321,6 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
       <div class="faq-item">
         <p class="faq-q">Mes informations restent-elles confidentielles ?</p>
         <p class="faq-a">Oui, en particulier pour les récits de vie et mémoires. Vos informations ne sont utilisées que pour réaliser votre commande.</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">Quelle formule choisir pour mon tunnel de vente ?</p>
-        <p class="faq-a">Le Guide si vous êtes à l'aise pour avancer seul avec des instructions détaillées. L'Accompagnement Guidé si vous voulez comprendre et garder la main, avec quelqu'un à vos côtés. Le Tunnel Clé en Main si vous préférez qu'on s'occupe de tout pendant que vous vous concentrez sur votre activité.</p>
       </div>
       <div class="faq-item">
         <p class="faq-q">Je n'ai pas trouvé la prestation qu'il me faut ?</p>
