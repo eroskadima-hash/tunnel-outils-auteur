@@ -43,7 +43,7 @@
 }
 
 * { box-sizing: border-box; }
-html { background: var(--et-void); scroll-behavior: smooth; }
+html { background: var(--et-void); scroll-behavior: smooth; overflow-x: hidden; }
 
 body.etoile {
   margin: 0;
@@ -69,6 +69,17 @@ body.etoile::after {
     radial-gradient(1100px 680px at 90% 2%, rgba(255,207,138,.05), transparent 62%),
     radial-gradient(950px 620px at 14% 98%, rgba(79,184,255,.04), transparent 65%),
     radial-gradient(950px 620px at 86% 98%, rgba(255,207,138,.04), transparent 65%);
+}
+
+/* fond d'assombrissement derriere le widget de paiement Chariow (le widget n'en fournit pas lui-meme) */
+body.etoile:has(.cw-modal-wrapper)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(5,7,12,.82);
+  backdrop-filter: blur(3px);
+  pointer-events: none;
 }
 
 .w { max-width: 1040px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
@@ -169,6 +180,21 @@ p { margin: 0 0 1em; }
 .hero-byline { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: .34em; text-transform: uppercase; color: var(--et-void); text-shadow: 0 1px 0 rgba(255,255,255,.3); margin: 2px 0 0; }
 .hero .lede { font-style: italic; font-size: 21px; color: var(--et-cream); max-width: 520px; margin: 22px auto 0; text-shadow: 0 2px 16px rgba(10,8,6,.85), 0 0 30px rgba(10,8,6,.6); }
 .const-label { font-family: 'Space Grotesk', sans-serif; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; fill: var(--et-dim); paint-order: stroke; stroke: rgba(9,7,5,.75); stroke-width: 3px; }
+
+/* -------- constellation "Le Chariot": la ligne se noue a l'entree dans le viewport -------- */
+.const-animated .const-path { opacity: 0; transition: opacity 1s ease .5s; }
+.const-animated.in-view .const-path { opacity: 1; }
+.const-animated .const-node { opacity: 0; transform: scale(.55); transform-box: fill-box; transform-origin: center; transition: opacity .55s ease, transform .55s cubic-bezier(.24,1.4,.4,1); }
+.const-animated.in-view .const-node:nth-of-type(1) { opacity: 1; transform: scale(1); }
+.const-animated.in-view .const-node:nth-of-type(2) { opacity: 1; transform: scale(1); transition-delay: .2s; }
+.const-animated.in-view .const-node:nth-of-type(3) { opacity: 1; transform: scale(1); transition-delay: .4s; }
+.const-animated .const-node-mid circle:first-child { transform-box: fill-box; transform-origin: center; }
+.const-animated.in-view .const-node-mid circle:first-child { animation: constPulse 2.4s ease-in-out .95s infinite; }
+@keyframes constPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.32); } }
+@media (prefers-reduced-motion: reduce) {
+  .const-animated .const-path, .const-animated .const-node { opacity: 1; transform: none; transition: none; }
+  .const-animated .const-node-mid circle:first-child { animation: none; }
+}
 .scroll-cue { margin-top: 54px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--et-star-dim); text-shadow: 0 1px 8px rgba(9,7,5,.9); }
 .scroll-cue::after { content: ""; display: block; width: 1px; height: 30px; margin: 10px auto 0; background: linear-gradient(to bottom, var(--et-star-dim), transparent); }
 
@@ -198,7 +224,18 @@ section { position: relative; padding: 90px 0; }
     linear-gradient(155deg, var(--et-panel-solid), #0c1119 85%);
   border: 1px solid var(--et-line-solid); overflow: hidden;
 }
-.console::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--et-lamp), var(--et-cream), var(--et-day), transparent); opacity: .5; }
+.console::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--et-lamp), var(--et-cream), var(--et-day), transparent); opacity: .5; z-index: 3; }
+.console-video-wrap { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.console-video-poster, .console-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .5; }
+.console-video-poster { z-index: 0; }
+.console-video { z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .console-video { display: none; } }
+.console-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none; background:
+    radial-gradient(420px 220px at 15% -10%, rgba(255,207,138,.16), transparent 60%),
+    radial-gradient(420px 260px at 96% 108%, rgba(79,184,255,.16), transparent 62%),
+    linear-gradient(155deg, rgba(15,12,9,.86), rgba(6,9,14,.93) 85%);
+}
+.console-content { position: relative; z-index: 2; }
 .console-head { text-align: center; margin-bottom: 8px; }
 .console-head h2 { font-size: clamp(26px, 3vw, 34px); }
 .const-steps { margin: 30px auto 6px; max-width: 640px; }
@@ -222,6 +259,18 @@ section { position: relative; padding: 90px 0; }
 .gauge-readout .gr-unit { font-size: 12px; color: var(--et-dim); margin-left: 4px; }
 .gauge-caption { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--et-dim); max-width: 190px; margin: 6px auto 0; line-height: 1.4; }
 
+/* -------- gauge: l'instrument s'allume a l'entree dans le viewport -------- */
+.dial-anim .dial-fill { transition: stroke-dashoffset 1.3s cubic-bezier(.22,.8,.28,1) .15s; }
+.dial-anim:not(.in-view) .dial-fill { stroke-dashoffset: var(--dial-circ, 300) !important; }
+.dial-anim .dial-needle { transform-origin: var(--dial-cx, 50%) var(--dial-cy, 50%); transition: transform 1.3s cubic-bezier(.22,.8,.28,1) .15s; }
+.dial-anim:not(.in-view) .dial-needle { transform: rotate(calc(-1 * var(--dial-sweep, 0deg))); }
+.dial-anim.in-view .dial-needle { transform: rotate(0deg); }
+@media (prefers-reduced-motion: reduce) {
+  .dial-anim .dial-fill, .dial-anim .dial-needle { transition: none; }
+  .dial-anim:not(.in-view) .dial-fill { stroke-dashoffset: inherit !important; }
+  .dial-anim:not(.in-view) .dial-needle { transform: none; }
+}
+
 /* -------- article grid (asymmetric editorial) -------- */
 .articles-head { text-align: center; margin-bottom: 54px; }
 .article-featured { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; padding: 8px 0 56px; border-bottom: 1px solid var(--et-line-solid); margin-bottom: 48px; }
@@ -238,7 +287,12 @@ section { position: relative; padding: 90px 0; }
 .a-readmore:hover span.arrow { transform: translateX(4px); }
 
 .article-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.article-card { padding: 30px 26px; border: 1px solid var(--et-line-solid); border-radius: 8px; background: linear-gradient(160deg, rgba(255,255,255,.015), transparent); }
+.article-card { padding: 30px 26px; border: 1px solid var(--et-line-solid); border-radius: 8px; background: linear-gradient(160deg, rgba(255,255,255,.015), transparent); position: relative; overflow: hidden; }
+.article-card::before { content: ""; position: absolute; inset: 0; z-index: 0; opacity: 0; transition: opacity .4s ease; pointer-events: none;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 30%), rgba(255,207,138,.10), rgba(79,184,255,.05) 55%, transparent 72%); }
+.article-card:hover::before, .article-card:focus-within::before { opacity: 1; }
+.article-card > * { position: relative; z-index: 1; }
+@media (hover: none) { .article-card::before { display: none; } }
 .article-card .a-eyebrow { font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--et-label); margin: 0 0 10px; }
 .article-card h3 { font-size: 22px; margin-bottom: 8px; }
 .article-card h3 a { color: inherit; text-decoration: none; }
@@ -251,7 +305,7 @@ section { position: relative; padding: 90px 0; }
 }
 
 /* -------- closing -------- */
-.closing { text-align: center; position: relative; }
+.closing { text-align: center; position: relative; overflow: hidden; }
 .closing::before { content: ""; position: absolute; inset: -8% -8% auto -8%; height: 100%; z-index: 0; pointer-events: none;
   background:
     radial-gradient(620px 380px at 12% 30%, rgba(79,184,255,.08), transparent 62%),
@@ -269,10 +323,21 @@ section { position: relative; padding: 90px 0; }
 .et-footer a:hover { color: var(--et-lamp); }
 
 /* -------- article reading page -------- */
-.article-header { text-align: center; padding: 74px 0 10px; position: relative; }
-.article-header h1 { font-size: clamp(34px, 6vw, 50px); line-height: 1.08; margin: 12px 0 16px; }
-.article-header .a-sub { font-style: italic; color: var(--et-dim); font-size: 19px; max-width: 580px; margin: 0 auto; }
-.article-header .a-meta-top { font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--et-star-dim); margin-top: 20px; }
+.article-header { text-align: center; padding: 100px 0 40px; position: relative; overflow: hidden; }
+.ah-video-wrap { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.ah-video-poster, .ah-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.ah-video-poster { z-index: 0; }
+.ah-video { z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .ah-video { display: none; } }
+.ah-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(9,7,5,.62) 0%, rgba(9,7,5,.2) 30%, rgba(9,7,5,.3) 60%, rgba(9,7,5,.82) 100%),
+    radial-gradient(52% 42% at 50% 42%, rgba(9,7,5,.05) 0%, rgba(9,7,5,.55) 100%);
+}
+.article-header h1 { font-size: clamp(34px, 6vw, 50px); line-height: 1.08; margin: 12px 0 16px; text-shadow: 0 2px 18px rgba(9,7,5,.85), 0 0 34px rgba(9,7,5,.6); }
+.article-header .a-sub { font-style: italic; color: var(--et-cream); font-size: 19px; max-width: 580px; margin: 0 auto; text-shadow: 0 2px 14px rgba(9,7,5,.85); }
+.article-header .a-meta-top { font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--et-star-dim); margin-top: 20px; text-shadow: 0 2px 10px rgba(9,7,5,.9); }
+.article-header .eyebrow { text-shadow: 0 2px 10px rgba(9,7,5,.9); }
 .article-body { font-size: 18.5px; max-width: 700px; margin: 0 auto; }
 .article-body p { margin-bottom: 1.15em; }
 .back-link { display: inline-flex; align-items: center; gap: 6px; margin: 10px 0 0; font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--et-dim); text-decoration: none; }
@@ -376,27 +441,35 @@ section { position: relative; padding: 90px 0; }
 <section>
   <div class="w-narrow">
     <div class="console">
+      <div class="console-video-wrap">
+      <img class="console-video-poster" src="/etoile/assets/chariot-bg-poster.jpg" alt="" aria-hidden="true">
+      <video class="console-video" autoplay muted loop playsinline preload="metadata" poster="/etoile/assets/chariot-bg-poster.jpg">
+        <source src="/etoile/assets/chariot-bg.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="console-scrim"></div>
+      <div class="console-content">
       <div class="console-head">
         <p class="eyebrow">Le Chariot</p>
         <h2>Un don libre, par confiance</h2>
       </div>
-      <div class="const-steps"><svg class="constellation" viewBox="0 0 560 140" width="100%" height="140" preserveAspectRatio="xMidYMid meet">
+      <div class="const-steps"><svg class="constellation const-animated" viewBox="0 0 560 140" width="100%" height="140" preserveAspectRatio="xMidYMid meet">
   <defs>
     <filter id="glowsteps" x="-80%" y="-80%" width="260%" height="260%">
       <feGaussianBlur stdDeviation="4" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <path d="M 56 77 Q 280 16 280 46 T 504 77" fill="none" stroke="var(--et-star-dim)" stroke-width="1.2" stroke-dasharray="1 7" stroke-linecap="round"/>
-  <g>
+  <path class="const-path" d="M 56 77 Q 280 16 280 46 T 504 77" fill="none" stroke="var(--et-star-dim)" stroke-width="1.2" stroke-dasharray="1 7" stroke-linecap="round"/>
+  <g class="const-node">
       <circle cx="56" cy="77" r="9" fill="var(--et-void)" stroke="var(--et-lamp)" stroke-width="1.5" filter="url(#glowsteps)"/>
       <circle cx="56" cy="77" r="3.2" fill="var(--et-lamp)"/>
       <text x="56" y="103" text-anchor="middle" class="const-label">Vous lisez</text>
-    </g><g>
+    </g><g class="const-node const-node-mid">
       <circle cx="280" cy="46" r="9" fill="var(--et-void)" stroke="var(--et-day)" stroke-width="1.5" filter="url(#glowsteps)"/>
       <circle cx="280" cy="46" r="3.2" fill="var(--et-day)"/>
       <text x="280" y="72" text-anchor="middle" class="const-label">Vous jugez</text>
-    </g><g>
+    </g><g class="const-node">
       <circle cx="504" cy="77" r="9" fill="var(--et-void)" stroke="var(--et-lamp)" stroke-width="1.5" filter="url(#glowsteps)"/>
       <circle cx="504" cy="77" r="3.2" fill="var(--et-lamp)"/>
       <text x="504" y="103" text-anchor="middle" class="const-label">Vous contribuez</text>
@@ -410,6 +483,7 @@ section { position: relative; padding: 90px 0; }
       <div class="console-cta">
         <p class="ct-text">Un simple geste de confiance envers la recherche que vous venez de lire.</p>
         <div class="snap-widget-wrap"><div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_25gtxc63" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="sm" data-cta-animation="none" data-locale="fr" data-primary-color="#ffcf8a" data-background-color="#10161f" data-custom-cta-text="Soutenir la recherche"></div></div>
+      </div>
       </div>
     </div>
   </div>
@@ -433,8 +507,8 @@ section { position: relative; padding: 90px 0; }
       <div class="a-meta">6 min DE LECTURE</div>
       <a class="a-readmore" href="/etoile/la-memoire-des-oracles/">Lire l'article <span class="arrow">→</span></a>
     </div>
-    <div><div class="gauge-instrument">
-  <svg class="dial" viewBox="0 0 168 104" width="168" height="104">
+    <div><div class="gauge-instrument" data-value="1500">
+  <svg class="dial dial-anim" viewBox="0 0 168 104" width="168" height="104">
   <defs>
     <linearGradient id="dialfillfeat" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="var(--et-day)"/>
@@ -448,14 +522,14 @@ section { position: relative; padding: 90px 0; }
     </filter>
   </defs>
   <path d="M 16.8 77.3 A 67.2 67.2 0 0 1 151.2 77.3" fill="none" stroke="var(--et-panel-2)" stroke-width="7" stroke-linecap="round"/>
-  <path d="M 16.8 77.3 A 67.2 67.2 0 0 1 151.2 77.3" fill="none" stroke="url(#dialfillfeat)" stroke-width="7" stroke-linecap="round"
+  <path class="dial-fill" style="--dial-circ:211.1" d="M 16.8 77.3 A 67.2 67.2 0 0 1 151.2 77.3" fill="none" stroke="url(#dialfillfeat)" stroke-width="7" stroke-linecap="round"
         stroke-dasharray="211.1" stroke-dashoffset="147.8"/>
   <line x1="13.8" y1="77.3" x2="23.8" y2="77.3" stroke="var(--et-line)" stroke-width="2"/><line x1="34.4" y1="27.6" x2="41.4" y2="34.7" stroke="var(--et-line)" stroke-width="2"/><line x1="84.0" y1="7.1" x2="84.0" y2="17.1" stroke="var(--et-line)" stroke-width="2"/><line x1="133.6" y1="27.6" x2="126.6" y2="34.7" stroke="var(--et-line)" stroke-width="2"/><line x1="154.2" y1="77.3" x2="144.2" y2="77.3" stroke="var(--et-line)" stroke-width="2"/>
-  <line x1="84.0" y1="77.28" x2="56.3" y2="39.1" stroke="var(--et-lamp)" stroke-width="2.5" stroke-linecap="round" filter="url(#dialglowfeat)"/>
+  <line class="dial-needle" style="--dial-cx:84.0px;--dial-cy:77.3px;--dial-sweep:54.0deg" x1="84.0" y1="77.28" x2="56.3" y2="39.1" stroke="var(--et-lamp)" stroke-width="2.5" stroke-linecap="round" filter="url(#dialglowfeat)"/>
   <circle cx="84.0" cy="77.28" r="4.5" fill="var(--et-lamp)"/>
 </svg>
   <div class="gauge-readout">
-    <span class="gr-amt">1 500</span><span class="gr-unit">FCFA</span>
+    <span class="gr-amt" data-final="1 500">0</span><span class="gr-unit">FCFA</span>
   </div>
   <p class="gauge-caption">Valeur suggérée &mdash; donnez ce que vous jugez juste</p>
 </div></div>
@@ -465,8 +539,8 @@ section { position: relative; padding: 90px 0; }
     <p class="a-eyebrow">Futur & mémoire collective</p>
     <h3><a href="/etoile/conscience-augmentee/">Conscience Augmentée</a></h3>
     <p class="a-sub">Quand les savoirs ancestraux et l'intelligence artificielle se répondent</p>
-    <div class="gauge-instrument compact">
-  <svg class="dial" viewBox="0 0 140 87" width="140" height="87">
+    <div class="gauge-instrument compact" data-value="2000">
+  <svg class="dial dial-anim" viewBox="0 0 140 87" width="140" height="87">
   <defs>
     <linearGradient id="dialfilld2" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="var(--et-day)"/>
@@ -480,14 +554,14 @@ section { position: relative; padding: 90px 0; }
     </filter>
   </defs>
   <path d="M 14.0 64.4 A 56.0 56.0 0 0 1 126.0 64.4" fill="none" stroke="var(--et-panel-2)" stroke-width="7" stroke-linecap="round"/>
-  <path d="M 14.0 64.4 A 56.0 56.0 0 0 1 126.0 64.4" fill="none" stroke="url(#dialfilld2)" stroke-width="7" stroke-linecap="round"
+  <path class="dial-fill" style="--dial-circ:175.9" d="M 14.0 64.4 A 56.0 56.0 0 0 1 126.0 64.4" fill="none" stroke="url(#dialfilld2)" stroke-width="7" stroke-linecap="round"
         stroke-dasharray="175.9" stroke-dashoffset="105.6"/>
   <line x1="11.0" y1="64.4" x2="21.0" y2="64.4" stroke="var(--et-line)" stroke-width="2"/><line x1="28.3" y1="22.7" x2="35.4" y2="29.8" stroke="var(--et-line)" stroke-width="2"/><line x1="70.0" y1="5.4" x2="70.0" y2="15.4" stroke="var(--et-line)" stroke-width="2"/><line x1="111.7" y1="22.7" x2="104.6" y2="29.8" stroke="var(--et-line)" stroke-width="2"/><line x1="129.0" y1="64.4" x2="119.0" y2="64.4" stroke="var(--et-line)" stroke-width="2"/>
-  <line x1="70.0" y1="64.4" x2="58.9" y2="30.2" stroke="var(--et-lamp)" stroke-width="2.5" stroke-linecap="round" filter="url(#dialglowd2)"/>
+  <line class="dial-needle" style="--dial-cx:70.0px;--dial-cy:64.4px;--dial-sweep:72.0deg" x1="70.0" y1="64.4" x2="58.9" y2="30.2" stroke="var(--et-lamp)" stroke-width="2.5" stroke-linecap="round" filter="url(#dialglowd2)"/>
   <circle cx="70.0" cy="64.4" r="4.5" fill="var(--et-lamp)"/>
 </svg>
   <div class="gauge-readout">
-    <span class="gr-amt">2 000</span><span class="gr-unit">FCFA</span>
+    <span class="gr-amt" data-final="2 000">0</span><span class="gr-unit">FCFA</span>
   </div>
   <p class="gauge-caption">Valeur suggérée &mdash; donnez ce que vous jugez juste</p>
 </div>
@@ -498,8 +572,8 @@ section { position: relative; padding: 90px 0; }
     <p class="a-eyebrow">Psychologie du sens</p>
     <h3><a href="/etoile/le-biais-qui-precede-la-foi/">Le Biais qui Précède la Foi</a></h3>
     <p class="a-sub">Psychologie, spiritualité et le besoin humain de sens</p>
-    <div class="gauge-instrument compact">
-  <svg class="dial" viewBox="0 0 140 87" width="140" height="87">
+    <div class="gauge-instrument compact" data-value="1200">
+  <svg class="dial dial-anim" viewBox="0 0 140 87" width="140" height="87">
   <defs>
     <linearGradient id="dialfilld3" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="var(--et-day)"/>
@@ -513,14 +587,14 @@ section { position: relative; padding: 90px 0; }
     </filter>
   </defs>
   <path d="M 14.0 64.4 A 56.0 56.0 0 0 1 126.0 64.4" fill="none" stroke="var(--et-panel-2)" stroke-width="7" stroke-linecap="round"/>
-  <path d="M 14.0 64.4 A 56.0 56.0 0 0 1 126.0 64.4" fill="none" stroke="url(#dialfilld3)" stroke-width="7" stroke-linecap="round"
+  <path class="dial-fill" style="--dial-circ:175.9" d="M 14.0 64.4 A 56.0 56.0 0 0 1 126.0 64.4" fill="none" stroke="url(#dialfilld3)" stroke-width="7" stroke-linecap="round"
         stroke-dasharray="175.9" stroke-dashoffset="133.7"/>
   <line x1="11.0" y1="64.4" x2="21.0" y2="64.4" stroke="var(--et-line)" stroke-width="2"/><line x1="28.3" y1="22.7" x2="35.4" y2="29.8" stroke="var(--et-line)" stroke-width="2"/><line x1="70.0" y1="5.4" x2="70.0" y2="15.4" stroke="var(--et-line)" stroke-width="2"/><line x1="111.7" y1="22.7" x2="104.6" y2="29.8" stroke="var(--et-line)" stroke-width="2"/><line x1="129.0" y1="64.4" x2="119.0" y2="64.4" stroke="var(--et-line)" stroke-width="2"/>
-  <line x1="70.0" y1="64.4" x2="43.8" y2="39.8" stroke="var(--et-lamp)" stroke-width="2.5" stroke-linecap="round" filter="url(#dialglowd3)"/>
+  <line class="dial-needle" style="--dial-cx:70.0px;--dial-cy:64.4px;--dial-sweep:43.2deg" x1="70.0" y1="64.4" x2="43.8" y2="39.8" stroke="var(--et-lamp)" stroke-width="2.5" stroke-linecap="round" filter="url(#dialglowd3)"/>
   <circle cx="70.0" cy="64.4" r="4.5" fill="var(--et-lamp)"/>
 </svg>
   <div class="gauge-readout">
-    <span class="gr-amt">1 200</span><span class="gr-unit">FCFA</span>
+    <span class="gr-amt" data-final="1 200">0</span><span class="gr-unit">FCFA</span>
   </div>
   <p class="gauge-caption">Valeur suggérée &mdash; donnez ce que vous jugez juste</p>
 </div>
@@ -550,6 +624,76 @@ section { position: relative; padding: 90px 0; }
   link.rel = 'stylesheet';
   link.href = 'https://js.chariowcdn.com/v1/widget.min.css';
   document.head.appendChild(link);
+})();
+</script>
+<script>
+(function() {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+
+  function animateCount(el, finalText, duration) {
+    var target = parseInt(finalText.replace(/[^0-9]/g, ''), 10);
+    if (!target || reduceMotion) { el.textContent = finalText; return; }
+    var start = null;
+    function tick(now) {
+      if (start === null) start = now;
+      var p = Math.min(1, (now - start) / duration);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(target * eased));
+      if (p < 1) requestAnimationFrame(tick); else el.textContent = finalText;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // -- jauges : l'arc et l'aiguille se deploient, le chiffre compte, a l'entree dans le viewport --
+  var dials = document.querySelectorAll('.dial-anim');
+  function revealDial(svg) {
+    svg.classList.add('in-view');
+    var wrap = svg.closest('.gauge-instrument');
+    var amt = wrap && wrap.querySelector('.gr-amt');
+    if (amt) animateCount(amt, amt.getAttribute('data-final') || amt.textContent, 1300);
+  }
+  if (dials.length) {
+    if ('IntersectionObserver' in window) {
+      var dialIO = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          revealDial(entry.target);
+          dialIO.unobserve(entry.target);
+        });
+      }, { threshold: .5 });
+      dials.forEach(function(d) { dialIO.observe(d); });
+    } else {
+      dials.forEach(revealDial);
+    }
+  }
+
+  // -- constellation "Le Chariot" : les points et le lien apparaissent a l'entree dans le viewport --
+  var consts = document.querySelectorAll('.const-animated');
+  if (consts.length) {
+    if ('IntersectionObserver' in window) {
+      var constIO = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('in-view'); constIO.unobserve(entry.target); }
+        });
+      }, { threshold: .4 });
+      consts.forEach(function(c) { constIO.observe(c); });
+    } else {
+      consts.forEach(function(c) { c.classList.add('in-view'); });
+    }
+  }
+
+  // -- lueur qui suit le curseur sur les cartes d'articles (desktop uniquement) --
+  if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.article-card').forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  }
 })();
 </script>
 </body>
