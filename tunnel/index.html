@@ -251,6 +251,15 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 .tunnel-includes .row { display: flex; gap: 12px; align-items: baseline; font-size: 15.5px; color: var(--cream-dim); }
 .tunnel-includes .row::before { content: ""; flex: none; width: 6px; height: 6px; background: var(--bright-red); transform: rotate(45deg); margin-top: 5px; }
 
+
+.etoile-link { display: inline-flex !important; align-items: center; gap: 7px; }
+.etoile-spark { display: inline-block; font-size: 12px; line-height: 1; color: #ffcf8a; text-shadow: 0 0 6px rgba(255,207,138,.95), 0 0 14px rgba(255,207,138,.55); animation: pharmacyBlink 4s steps(1,end) infinite; }
+@keyframes pharmacyBlink {
+  0%, 100% { opacity: 1; }
+  4% { opacity: .18; } 8% { opacity: 1; } 12% { opacity: .15; } 16% { opacity: 1; }
+  72% { opacity: 1; } 76% { opacity: .2; } 80% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .etoile-spark { animation: none; } }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -270,6 +279,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
       <a href="/chansons/">Chansons</a>
       <a href="/histoires/">Histoires</a>
       <a href="/tunnel/" class="active">Créer ton Tunnel</a>
+      <a href="/etoile/" class="etoile-link"><span class="etoile-spark">✦</span>Étoile</a>
     </div>
   </div>
 </nav>
