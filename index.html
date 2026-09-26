@@ -180,6 +180,21 @@ p { margin: 0 0 1em; }
 .hero-byline { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: .34em; text-transform: uppercase; color: var(--et-void); text-shadow: 0 1px 0 rgba(255,255,255,.3); margin: 2px 0 0; }
 .hero .lede { font-style: italic; font-size: 21px; color: var(--et-cream); max-width: 520px; margin: 22px auto 0; text-shadow: 0 2px 16px rgba(10,8,6,.85), 0 0 30px rgba(10,8,6,.6); }
 .const-label { font-family: 'Space Grotesk', sans-serif; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; fill: var(--et-dim); paint-order: stroke; stroke: rgba(9,7,5,.75); stroke-width: 3px; }
+
+/* -------- constellation "Le Chariot": la ligne se noue a l'entree dans le viewport -------- */
+.const-animated .const-path { opacity: 0; transition: opacity 1s ease .5s; }
+.const-animated.in-view .const-path { opacity: 1; }
+.const-animated .const-node { opacity: 0; transform: scale(.55); transform-box: fill-box; transform-origin: center; transition: opacity .55s ease, transform .55s cubic-bezier(.24,1.4,.4,1); }
+.const-animated.in-view .const-node:nth-of-type(1) { opacity: 1; transform: scale(1); }
+.const-animated.in-view .const-node:nth-of-type(2) { opacity: 1; transform: scale(1); transition-delay: .2s; }
+.const-animated.in-view .const-node:nth-of-type(3) { opacity: 1; transform: scale(1); transition-delay: .4s; }
+.const-animated .const-node-mid circle:first-child { transform-box: fill-box; transform-origin: center; }
+.const-animated.in-view .const-node-mid circle:first-child { animation: constPulse 2.4s ease-in-out .95s infinite; }
+@keyframes constPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.32); } }
+@media (prefers-reduced-motion: reduce) {
+  .const-animated .const-path, .const-animated .const-node { opacity: 1; transform: none; transition: none; }
+  .const-animated .const-node-mid circle:first-child { animation: none; }
+}
 .scroll-cue { margin-top: 54px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--et-star-dim); text-shadow: 0 1px 8px rgba(9,7,5,.9); }
 .scroll-cue::after { content: ""; display: block; width: 1px; height: 30px; margin: 10px auto 0; background: linear-gradient(to bottom, var(--et-star-dim), transparent); }
 
@@ -209,7 +224,18 @@ section { position: relative; padding: 90px 0; }
     linear-gradient(155deg, var(--et-panel-solid), #0c1119 85%);
   border: 1px solid var(--et-line-solid); overflow: hidden;
 }
-.console::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--et-lamp), var(--et-cream), var(--et-day), transparent); opacity: .5; }
+.console::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--et-lamp), var(--et-cream), var(--et-day), transparent); opacity: .5; z-index: 3; }
+.console-video-wrap { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.console-video-poster, .console-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .5; }
+.console-video-poster { z-index: 0; }
+.console-video { z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .console-video { display: none; } }
+.console-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none; background:
+    radial-gradient(420px 220px at 15% -10%, rgba(255,207,138,.16), transparent 60%),
+    radial-gradient(420px 260px at 96% 108%, rgba(79,184,255,.16), transparent 62%),
+    linear-gradient(155deg, rgba(15,12,9,.86), rgba(6,9,14,.93) 85%);
+}
+.console-content { position: relative; z-index: 2; }
 .console-head { text-align: center; margin-bottom: 8px; }
 .console-head h2 { font-size: clamp(26px, 3vw, 34px); }
 .const-steps { margin: 30px auto 6px; max-width: 640px; }
@@ -233,6 +259,18 @@ section { position: relative; padding: 90px 0; }
 .gauge-readout .gr-unit { font-size: 12px; color: var(--et-dim); margin-left: 4px; }
 .gauge-caption { font-family: 'Space Grotesk', sans-serif; font-size: 11px; color: var(--et-dim); max-width: 190px; margin: 6px auto 0; line-height: 1.4; }
 
+/* -------- gauge: l'instrument s'allume a l'entree dans le viewport -------- */
+.dial-anim .dial-fill { transition: stroke-dashoffset 1.3s cubic-bezier(.22,.8,.28,1) .15s; }
+.dial-anim:not(.in-view) .dial-fill { stroke-dashoffset: var(--dial-circ, 300) !important; }
+.dial-anim .dial-needle { transform-origin: var(--dial-cx, 50%) var(--dial-cy, 50%); transition: transform 1.3s cubic-bezier(.22,.8,.28,1) .15s; }
+.dial-anim:not(.in-view) .dial-needle { transform: rotate(calc(-1 * var(--dial-sweep, 0deg))); }
+.dial-anim.in-view .dial-needle { transform: rotate(0deg); }
+@media (prefers-reduced-motion: reduce) {
+  .dial-anim .dial-fill, .dial-anim .dial-needle { transition: none; }
+  .dial-anim:not(.in-view) .dial-fill { stroke-dashoffset: inherit !important; }
+  .dial-anim:not(.in-view) .dial-needle { transform: none; }
+}
+
 /* -------- article grid (asymmetric editorial) -------- */
 .articles-head { text-align: center; margin-bottom: 54px; }
 .article-featured { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; padding: 8px 0 56px; border-bottom: 1px solid var(--et-line-solid); margin-bottom: 48px; }
@@ -249,7 +287,12 @@ section { position: relative; padding: 90px 0; }
 .a-readmore:hover span.arrow { transform: translateX(4px); }
 
 .article-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.article-card { padding: 30px 26px; border: 1px solid var(--et-line-solid); border-radius: 8px; background: linear-gradient(160deg, rgba(255,255,255,.015), transparent); }
+.article-card { padding: 30px 26px; border: 1px solid var(--et-line-solid); border-radius: 8px; background: linear-gradient(160deg, rgba(255,255,255,.015), transparent); position: relative; overflow: hidden; }
+.article-card::before { content: ""; position: absolute; inset: 0; z-index: 0; opacity: 0; transition: opacity .4s ease; pointer-events: none;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 30%), rgba(255,207,138,.10), rgba(79,184,255,.05) 55%, transparent 72%); }
+.article-card:hover::before, .article-card:focus-within::before { opacity: 1; }
+.article-card > * { position: relative; z-index: 1; }
+@media (hover: none) { .article-card::before { display: none; } }
 .article-card .a-eyebrow { font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--et-label); margin: 0 0 10px; }
 .article-card h3 { font-size: 22px; margin-bottom: 8px; }
 .article-card h3 a { color: inherit; text-decoration: none; }
@@ -280,10 +323,21 @@ section { position: relative; padding: 90px 0; }
 .et-footer a:hover { color: var(--et-lamp); }
 
 /* -------- article reading page -------- */
-.article-header { text-align: center; padding: 74px 0 10px; position: relative; }
-.article-header h1 { font-size: clamp(34px, 6vw, 50px); line-height: 1.08; margin: 12px 0 16px; }
-.article-header .a-sub { font-style: italic; color: var(--et-dim); font-size: 19px; max-width: 580px; margin: 0 auto; }
-.article-header .a-meta-top { font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--et-star-dim); margin-top: 20px; }
+.article-header { text-align: center; padding: 100px 0 40px; position: relative; overflow: hidden; }
+.ah-video-wrap { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.ah-video-poster, .ah-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.ah-video-poster { z-index: 0; }
+.ah-video { z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .ah-video { display: none; } }
+.ah-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(9,7,5,.62) 0%, rgba(9,7,5,.2) 30%, rgba(9,7,5,.3) 60%, rgba(9,7,5,.82) 100%),
+    radial-gradient(52% 42% at 50% 42%, rgba(9,7,5,.05) 0%, rgba(9,7,5,.55) 100%);
+}
+.article-header h1 { font-size: clamp(34px, 6vw, 50px); line-height: 1.08; margin: 12px 0 16px; text-shadow: 0 2px 18px rgba(9,7,5,.85), 0 0 34px rgba(9,7,5,.6); }
+.article-header .a-sub { font-style: italic; color: var(--et-cream); font-size: 19px; max-width: 580px; margin: 0 auto; text-shadow: 0 2px 14px rgba(9,7,5,.85); }
+.article-header .a-meta-top { font-family: 'Space Grotesk', sans-serif; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--et-star-dim); margin-top: 20px; text-shadow: 0 2px 10px rgba(9,7,5,.9); }
+.article-header .eyebrow { text-shadow: 0 2px 10px rgba(9,7,5,.9); }
 .article-body { font-size: 18.5px; max-width: 700px; margin: 0 auto; }
 .article-body p { margin-bottom: 1.15em; }
 .back-link { display: inline-flex; align-items: center; gap: 6px; margin: 10px 0 0; font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--et-dim); text-decoration: none; }
@@ -311,6 +365,13 @@ section { position: relative; padding: 90px 0; }
 </nav>
 
 <section class="article-header">
+  <div class="ah-video-wrap">
+    <img class="ah-video-poster" src="/etoile/assets/conscience-augmentee-bg-poster.jpg" alt="" aria-hidden="true">
+    <video class="ah-video" autoplay muted loop playsinline preload="metadata" poster="/etoile/assets/conscience-augmentee-bg-poster.jpg">
+      <source src="/etoile/assets/conscience-augmentee-bg.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="ah-scrim"></div>
   <div class="starfield" aria-hidden="true"><i style="left:61.25%;top:85.67%;--s:1.6px;--dur:4.56s;--delay:2.90s;--col:#f3e9d6;"></i><i style="left:36.63%;top:44.74%;--s:1px;--dur:5.95s;--delay:0.22s;--col:var(--et-lamp);"></i><i style="left:97.71%;top:72.20%;--s:1px;--dur:6.04s;--delay:0.34s;--col:var(--et-lamp);"></i><i style="left:23.99%;top:20.63%;--s:1px;--dur:3.14s;--delay:3.05s;--col:#f3e9d6;"></i><i style="left:32.55%;top:64.07%;--s:1px;--dur:3.90s;--delay:0.92s;--col:#f3e9d6;"></i><i style="left:55.09%;top:38.39%;--s:1px;--dur:5.16s;--delay:0.93s;--col:var(--et-lamp);"></i><i style="left:64.05%;top:47.12%;--s:1px;--dur:4.91s;--delay:5.03s;--col:#f3e9d6;"></i><i style="left:9.62%;top:72.75%;--s:1px;--dur:5.80s;--delay:0.31s;--col:var(--et-day);"></i><i style="left:40.05%;top:32.82%;--s:1px;--dur:2.82s;--delay:2.50s;--col:#f3e9d6;"></i><i style="left:19.86%;top:94.23%;--s:1px;--dur:5.10s;--delay:3.94s;--col:var(--et-day);"></i><i style="left:52.22%;top:90.02%;--s:1px;--dur:4.49s;--delay:3.62s;--col:var(--et-lamp);"></i><i style="left:64.64%;top:8.21%;--s:1.6px;--dur:2.90s;--delay:0.76s;--col:#f3e9d6;"></i><i style="left:23.97%;top:45.29%;--s:1px;--dur:6.22s;--delay:1.41s;--col:#f3e9d6;"></i><i style="left:85.09%;top:46.11%;--s:1.6px;--dur:3.49s;--delay:5.02s;--col:var(--et-day);"></i><i style="left:14.85%;top:18.98%;--s:1.6px;--dur:3.86s;--delay:2.47s;--col:var(--et-lamp);"></i><i style="left:85.87%;top:25.08%;--s:1.6px;--dur:2.92s;--delay:3.79s;--col:#f3e9d6;"></i><i style="left:36.51%;top:19.84%;--s:1px;--dur:4.82s;--delay:2.84s;--col:#f3e9d6;"></i><i style="left:85.60%;top:33.40%;--s:1px;--dur:3.31s;--delay:3.32s;--col:#f3e9d6;"></i><i style="left:10.54%;top:62.42%;--s:1.6px;--dur:4.28s;--delay:5.10s;--col:#f3e9d6;"></i><i style="left:43.42%;top:52.00%;--s:1.6px;--dur:3.17s;--delay:4.09s;--col:var(--et-day);"></i><i style="left:83.50%;top:58.74%;--s:1px;--dur:2.81s;--delay:1.58s;--col:var(--et-day);"></i><i style="left:4.42%;top:58.64%;--s:1px;--dur:2.68s;--delay:1.58s;--col:#f3e9d6;"></i><i style="left:69.02%;top:57.30%;--s:2.2px;--dur:5.86s;--delay:5.90s;--col:var(--et-day);"></i><i style="left:54.99%;top:78.95%;--s:2.2px;--dur:2.72s;--delay:5.82s;--col:#f3e9d6;"></i></div>
   <div class="fireworks" aria-hidden="true"><div class="fw" style="left:48.42%;top:39.97%;--delay:3.85s;--dur:4.48s;"><svg viewBox="0 0 45 45" width="45" height="45">
     <circle cx="22.5" cy="22.5" r="2.4" fill="#e8b563"/>
@@ -330,8 +391,8 @@ section { position: relative; padding: 90px 0; }
 <section style="padding-top:0;">
   <div class="w-narrow">
     <div class="gauge-strip">
-      <div class="gauge-instrument compact">
-  <svg class="dial" viewBox="0 0 140 87" width="140" height="87">
+      <div class="gauge-instrument compact" data-value="2000">
+  <svg class="dial dial-anim" viewBox="0 0 140 87" width="140" height="87">
   <defs>
     <linearGradient id="dialfillart1" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="var(--et-day)"/>
@@ -345,14 +406,14 @@ section { position: relative; padding: 90px 0; }
     </filter>
   </defs>
   <path d="M 14.0 64.4 A 56.0 56.0 0 0 1 126.0 64.4" fill="none" stroke="var(--et-panel-2)" stroke-width="7" stroke-linecap="round"/>
-  <path d="M 14.0 64.4 A 56.0 56.0 0 0 1 126.0 64.4" fill="none" stroke="url(#dialfillart1)" stroke-width="7" stroke-linecap="round"
+  <path class="dial-fill" style="--dial-circ:175.9" d="M 14.0 64.4 A 56.0 56.0 0 0 1 126.0 64.4" fill="none" stroke="url(#dialfillart1)" stroke-width="7" stroke-linecap="round"
         stroke-dasharray="175.9" stroke-dashoffset="105.6"/>
   <line x1="11.0" y1="64.4" x2="21.0" y2="64.4" stroke="var(--et-line)" stroke-width="2"/><line x1="28.3" y1="22.7" x2="35.4" y2="29.8" stroke="var(--et-line)" stroke-width="2"/><line x1="70.0" y1="5.4" x2="70.0" y2="15.4" stroke="var(--et-line)" stroke-width="2"/><line x1="111.7" y1="22.7" x2="104.6" y2="29.8" stroke="var(--et-line)" stroke-width="2"/><line x1="129.0" y1="64.4" x2="119.0" y2="64.4" stroke="var(--et-line)" stroke-width="2"/>
-  <line x1="70.0" y1="64.4" x2="58.9" y2="30.2" stroke="var(--et-lamp)" stroke-width="2.5" stroke-linecap="round" filter="url(#dialglowart1)"/>
+  <line class="dial-needle" style="--dial-cx:70.0px;--dial-cy:64.4px;--dial-sweep:72.0deg" x1="70.0" y1="64.4" x2="58.9" y2="30.2" stroke="var(--et-lamp)" stroke-width="2.5" stroke-linecap="round" filter="url(#dialglowart1)"/>
   <circle cx="70.0" cy="64.4" r="4.5" fill="var(--et-lamp)"/>
 </svg>
   <div class="gauge-readout">
-    <span class="gr-amt">2 000</span><span class="gr-unit">FCFA</span>
+    <span class="gr-amt" data-final="2 000">0</span><span class="gr-unit">FCFA</span>
   </div>
   <p class="gauge-caption">Valeur suggérée &mdash; donnez ce que vous jugez juste</p>
 </div>
@@ -382,9 +443,18 @@ section { position: relative; padding: 90px 0; }
 <section style="padding-top:0;">
   <div class="w-narrow">
     <div class="console" style="text-align:center;">
+      <div class="console-video-wrap">
+      <img class="console-video-poster" src="/etoile/assets/chariot-bg-poster.jpg" alt="" aria-hidden="true">
+      <video class="console-video" autoplay muted loop playsinline preload="metadata" poster="/etoile/assets/chariot-bg-poster.jpg">
+        <source src="/etoile/assets/chariot-bg.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="console-scrim"></div>
+      <div class="console-content">
       <p class="eyebrow">Le Chariot</p>
       <p class="ct-text" style="margin:10px auto 24px;">Un don libre, à la hauteur de ce que vous jugez que cette recherche vaut.</p>
       <div class="snap-widget-wrap"><div id="chariow-widget" class="buy-link snap-slot" data-product-id="prd_25gtxc63" data-store-domain="boutique.eroskadima.com" data-style="tap" data-border-style="rounded" data-cta-width="md" data-cta-animation="none" data-locale="fr" data-primary-color="#ffcf8a" data-background-color="#10161f" data-custom-cta-text="Contribuer ce que je veux"></div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -404,6 +474,76 @@ section { position: relative; padding: 90px 0; }
   link.rel = 'stylesheet';
   link.href = 'https://js.chariowcdn.com/v1/widget.min.css';
   document.head.appendChild(link);
+})();
+</script>
+<script>
+(function() {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+
+  function animateCount(el, finalText, duration) {
+    var target = parseInt(finalText.replace(/[^0-9]/g, ''), 10);
+    if (!target || reduceMotion) { el.textContent = finalText; return; }
+    var start = null;
+    function tick(now) {
+      if (start === null) start = now;
+      var p = Math.min(1, (now - start) / duration);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(target * eased));
+      if (p < 1) requestAnimationFrame(tick); else el.textContent = finalText;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // -- jauges : l'arc et l'aiguille se deploient, le chiffre compte, a l'entree dans le viewport --
+  var dials = document.querySelectorAll('.dial-anim');
+  function revealDial(svg) {
+    svg.classList.add('in-view');
+    var wrap = svg.closest('.gauge-instrument');
+    var amt = wrap && wrap.querySelector('.gr-amt');
+    if (amt) animateCount(amt, amt.getAttribute('data-final') || amt.textContent, 1300);
+  }
+  if (dials.length) {
+    if ('IntersectionObserver' in window) {
+      var dialIO = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          revealDial(entry.target);
+          dialIO.unobserve(entry.target);
+        });
+      }, { threshold: .5 });
+      dials.forEach(function(d) { dialIO.observe(d); });
+    } else {
+      dials.forEach(revealDial);
+    }
+  }
+
+  // -- constellation "Le Chariot" : les points et le lien apparaissent a l'entree dans le viewport --
+  var consts = document.querySelectorAll('.const-animated');
+  if (consts.length) {
+    if ('IntersectionObserver' in window) {
+      var constIO = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('in-view'); constIO.unobserve(entry.target); }
+        });
+      }, { threshold: .4 });
+      consts.forEach(function(c) { constIO.observe(c); });
+    } else {
+      consts.forEach(function(c) { c.classList.add('in-view'); });
+    }
+  }
+
+  // -- lueur qui suit le curseur sur les cartes d'articles (desktop uniquement) --
+  if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.article-card').forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  }
 })();
 </script>
 </body>
