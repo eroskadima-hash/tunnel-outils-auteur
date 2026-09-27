@@ -175,6 +175,15 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 .navburger span:nth-child(2) { width: 70%; }
 .navburger:hover span { background: var(--bright-red); }
 
+.etoile-link { display: inline-flex !important; align-items: center; gap: 7px; }
+.etoile-spark { display: inline-block; font-size: 12px; line-height: 1; color: #ffcf8a; text-shadow: 0 0 6px rgba(255,207,138,.95), 0 0 14px rgba(255,207,138,.55); animation: pharmacyBlink 4s steps(1,end) infinite; }
+@keyframes pharmacyBlink {
+  0%, 100% { opacity: 1; }
+  4% { opacity: .18; } 8% { opacity: 1; } 12% { opacity: .15; } 16% { opacity: 1; }
+  72% { opacity: 1; } 76% { opacity: .2; } 80% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .etoile-spark { animation: none; } }
+
 @media (max-width: 768px) {
   .navframe { padding: 13px 18px; }
   .navbrand { font-size: 15px; }
@@ -351,6 +360,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
       <a href="/chansons/">Chansons</a>
       <a href="/histoires/" class="active">Histoires</a>
       <a href="/tunnel/">Créer ton Tunnel</a>
+      <a href="/etoile/" class="etoile-link"><span class="etoile-spark">✦</span>Étoile</a>
     </div>
   </div>
 </nav>
