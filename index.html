@@ -102,21 +102,44 @@ em { font-style: italic; color: var(--cream-dim); }
 
 /* ---------- HERO ---------- */
 .hero {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   min-height: clamp(540px, 82vh, 720px);
+  display: flex;
+}
+.hero-video-wrap { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.hero-poster-img, .hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+}
+.hero-poster-img { z-index: 0; }
+.hero-video { z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(10,8,9,.62) 0%, rgba(10,8,9,.18) 30%, rgba(10,8,9,.6) 66%, var(--ink) 100%),
+    radial-gradient(ellipse 90% 65% at 50% 12%, rgba(117,15,22,.28), transparent 60%);
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  box-sizing: border-box;
   padding: 48px 20px 60px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  background-image:
-    linear-gradient(180deg, rgba(10,8,9,.62) 0%, rgba(10,8,9,.18) 30%, rgba(10,8,9,.6) 66%, var(--ink) 100%),
-    radial-gradient(ellipse 90% 65% at 50% 12%, rgba(117,15,22,.28), transparent 60%),
-    url('images/hero.jpg');
-  background-size: cover;
-  background-position: center 22%;
-  background-repeat: no-repeat;
 }
 .hero .eyebrow { margin-bottom: 22px; text-shadow: 0 2px 16px rgba(0,0,0,.7); }
 .hero h1 {
@@ -907,11 +930,20 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
 <div class="frame">
 
   <section class="hero">
-    <p class="eyebrow">Les Outils de l'Auteur — Eros Kadima</p>
-    <h1>Une histoire qui tient en haleine.<br>Même si vous n'avez pas&nbsp;la&nbsp;plume&nbsp;facile.</h1>
-    <p class="lede">Racontez votre idée brute à une IA. Elle remplit le canevas avec les principes du livre. Vous rédigez, relisez, peaufinez — et le résultat vous ressemble.</p>
-    <a href="#offre" class="btn">Découvrir le Pack Auteur Complet</a>
-    <button type="button" class="hero-gift-hint" id="heroGiftHint"><span class="gift-badge">Offert</span>15 prompts IA pour démarrer — sans engagement</button>
+    <div class="hero-video-wrap">
+      <img loading="eager" fetchpriority="high" class="hero-poster-img" src="images/hero.jpg" alt="" aria-hidden="true">
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/hero.jpg">
+        <source src="images/hero-video.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-scrim"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Les Outils de l'Auteur — Eros Kadima</p>
+      <h1>Une histoire qui tient en haleine.<br>Même si vous n'avez pas&nbsp;la&nbsp;plume&nbsp;facile.</h1>
+      <p class="lede">Racontez votre idée brute à une IA. Elle remplit le canevas avec les principes du livre. Vous rédigez, relisez, peaufinez — et le résultat vous ressemble.</p>
+      <a href="#offre" class="btn">Découvrir le Pack Auteur Complet</a>
+      <button type="button" class="hero-gift-hint" id="heroGiftHint"><span class="gift-badge">Offert</span>15 prompts IA pour démarrer — sans engagement</button>
+    </div>
   </section>
 
   <section id="preuve">
