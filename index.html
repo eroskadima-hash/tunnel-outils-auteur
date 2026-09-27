@@ -102,9 +102,7 @@ em { font-style: italic; color: var(--cream-dim); }
 
 /* ---------- HERO ---------- */
 .hero {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100%;
   min-height: clamp(540px, 82vh, 720px);
   padding: 48px 20px 60px;
   text-align: center;
@@ -267,9 +265,7 @@ em { font-style: italic; color: var(--cream-dim); }
 
 /* ---------- AMPLEUR DU GENRE ---------- */
 .scope-section {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100%;
   padding-left: 20px;
   padding-right: 20px;
   border-top: none;
@@ -452,6 +448,17 @@ em { font-style: italic; color: var(--cream-dim); }
 .complet-covers img:nth-child(4) { left: calc(50% + 66px); top: 14px; transform: rotate(11deg); }
 .complet-covers img:nth-child(5) { left: calc(50% - 200px); top: 24px; transform: rotate(-17deg); z-index: 3; width: 86px;}
 .complet-covers img:nth-child(6) { left: calc(50% + 134px); top: 24px; transform: rotate(17deg); z-index: 3; width: 86px;}
+/* petits telephones (ex: iPhone SE, ~320-380px) : l'eventail de couvertures a largeur fixe
+   deborde du cadre a ces largeurs — on le resserre uniquement sous 380px, sans rien changer
+   au-dessus (verifie sans overflow horizontal a 320/360/375/430px). */
+@media (max-width: 380px) {
+  .complet-covers { height: 120px; }
+  .complet-covers img { width: 78px; }
+  .complet-covers img:nth-child(1) { left: calc(50% - 98px); }
+  .complet-covers img:nth-child(2) { left: calc(50% - 50px); }
+  .complet-covers img:nth-child(3) { left: calc(50% + 2px); }
+  .complet-covers img:nth-child(4) { left: calc(50% + 50px); }
+}
 .complet .price { font-size: 34px; color: var(--bright-red); font-family: 'Cardo', serif; font-weight: 700; margin-bottom: 4px; }
 .complet .price .old { font-size: 18px; color: var(--cream-dim); text-decoration: line-through; margin-right: 10px; font-family: 'EB Garamond', serif; font-weight: 400; }
 .complet .bonus-note { font-size: 14px; color: var(--cream-dim); margin-bottom: 26px; }
@@ -484,9 +491,7 @@ em { font-style: italic; color: var(--cream-dim); }
   padding-top: 110px;
   padding-bottom: 120px;
   border-top: none;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100%;
   background-image:
     linear-gradient(180deg, var(--ink) 0%, rgba(10,8,9,.4) 20%, rgba(10,8,9,.7) 75%, var(--ink) 100%),
     url('images/final.jpg');
@@ -849,7 +854,7 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
   .navlinks {
     position: absolute; top: 100%; left: 0; right: 0;
     flex-direction: column; align-items: stretch; gap: 0;
-    background: rgba(10,8,9,.98);
+    background: rgb(10,8,9);
     border-bottom: 1px solid var(--line);
     max-height: 0; overflow: hidden;
     transition: max-height .32s ease;
@@ -865,15 +870,6 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
   .navtoggle-input:checked ~ .navburger span:nth-child(2) { opacity: 0; }
   .navtoggle-input:checked ~ .navburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 100%; }
 }
-
-.etoile-link { display: inline-flex !important; align-items: center; gap: 7px; }
-.etoile-spark { display: inline-block; font-size: 12px; line-height: 1; color: #ffcf8a; text-shadow: 0 0 6px rgba(255,207,138,.95), 0 0 14px rgba(255,207,138,.55); animation: pharmacyBlink 4s steps(1,end) infinite; }
-@keyframes pharmacyBlink {
-  0%, 100% { opacity: 1; }
-  4% { opacity: .18; } 8% { opacity: 1; } 12% { opacity: .15; } 16% { opacity: 1; }
-  72% { opacity: 1; } 76% { opacity: .2; } 80% { opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) { .etoile-spark { animation: none; } }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -894,7 +890,6 @@ footer { text-align: center; padding: 40px 0 60px; color: var(--cream-dim); font
       <a href="/chansons/">Chansons</a>
       <a href="/histoires/">Histoires</a>
       <a href="/tunnel/">Créer ton Tunnel</a>
-      <a href="/etoile/" class="etoile-link"><span class="etoile-spark">✦</span>Étoile</a>
     </div>
   </div>
 </nav>
